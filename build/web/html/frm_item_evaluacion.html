@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Ítems de Evaluación</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="/css/vam.css" />
+        <link rel="stylesheet" href="/css/estilo_menu.css" />
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+        <table class="zona1" align="center" border="0" width="950" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td valign="top">
+                        <div align="center">
+                            <a href="/index.php"><img src="/images/banner_2014Mayo.png" alt="Banner" border="0" height="245" width="950"></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+       <div style="margin-left: 14.5%;">
+            <ul id="nav" style="height: 60px;">
+                <li><a href="frm_inicio.html"><img src="/images/home.png" /> Inicio</a></li>
+                <li><a href="#"><span><img style="width: 27px" src="/images/norm.ico" /> Normas</span></a>
+                    <div class="subs">
+                        <div class="col">
+                            <ul>
+                                <li><a href="frm_norma_1.html"><img src="/images/bub.png" />Normas de Competencia</a></li>
+                                <li><a href="frm_asignar_norma_modulo.html"><img src="/images/bub.png" /> Asignar Normas a Modulos</a></li>
+                                <li><a href="frm_elementos.html"><img src="/images/bub.png" /> Elementos de Competencia</a></li>
+                                <li><a href="frm_asignar_elemento_norma.html"><img src="/images/bub.png" /> Asignar Elementos a Normas</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href=""><span><img src="/images/top5.png" /> Resultados</span></a>
+                    <div class="subs">
+                        <div class="col">
+                            <ul>
+                                <li><a href="frm_resultados_aprendizaje.html"><img src="/images/bub.png" /> Resultados de Apredizaje</a></li>
+                                <li><a href="frm_asignar_resultado_modulo.html"><img src="/images/bub.png" /> Asignar Resultados a Materias</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                 <li><a href="#"><span><img src="/images/top3.png" /> Criterios</span></a>
+                    <div class="subs">
+                        <div class="col">
+                            <ul>
+                                <li><a href="frm_criterios.html"><img src="/images/bub.png" />Criterios y Rubricas de Evaluación</a></li>
+                                <li><a href="frm_asignar_criterio_modulo.html"><img src="/images/bub.png" />Asignar Criterio a Modulos</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="frm_evaluacion.html"><img src="/images/top4.png" /> Evaluación</a>
+                 <div class="subs">
+                        <div class="col">
+                            <ul>
+                                <li><a href="frm_evidencias_modulo_porc.html"><img src="/images/bub.png" />Porcentajes de Evidencias para Modulos</a></li>
+                                <li><a href="frm_item_evaluacion.html"><img src="/images/bub.png" />Seleccionar Ítems de Evaluación</a></li>
+                                <li><a href="frm_evaluacion.html"><img src="/images/bub.png" />Evaluar Estudiantes</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#"><img style="width: 27px" src="/images/reports.ico" /> Reportes</a></li>
+                <li><a href="#"><img style="width: 27px" src="/images/help3.ico" /> Ayuda</a>
+                 <div class="subs">
+                        <div class="col">
+                            <ul>
+                                <li><a href="#"><img src="/images/bub.png" /> Manual de Usuario</a></li>
+                                <li><a href="#"><img style="width: 27px" src="/images/help4.ico" /> Acerca de</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div style="margin-left: 15%; margin-bottom:4%; background-color: #ffffff; margin-right: 15%; padding: 2%">
+            <p class="titulo2">Ítems de Evaluación</p>
+            <div style="margin-left: 20%" class="table-responsive">
+                <table border="0" class="table-condensed" cellspacing="0" cellpadding="2" width="100%">
+                    <tr>
+                        <td class="titulo" colspan="2" width="20%">Institución</td>
+                        <td class="contenido" colspan="5">
+                            <form>
+                                <input style="width: 70%; height: 30px;" type="text" value="Institución Educativa Marco Fidel Suarez" disabled="true"></input>
+                            </form></td>
+                    </tr>
+                    <tr>
+                        <td class="titulo" colspan="2">Docente</td>
+                        <td class="contenido" colspan="5"><form><input style="width: 70%; height: 30px;" type="text" 
+                                                                       value="Jhon Jairo Monsalve" disabled="true" /></form></td>
+                    </tr>
+                    <tr>
+                        <td class="titulo" colspan="2">Modulo</td>
+                        <td colspan="5"><select class="select" style="width:70%; height: 30px;">
+                                <option value="0">Seleccione el Modulo</option>
+                                <option value="1">Desarrollo del Pensamiento Analítico y Sistemico 1</option>
+                                <option value="2">Desarrollo del Pensamiento Analítico y Sistemico 2</option>
+                            </select></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <table border="1" style="width: 98%; border-top-color: #006600 5px;"> 
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="table-responsive" style="padding-right: 2%">
+
+                <table class="table table-striped" cellspacing="0" cellpadding="2" width="90%" style="border-top-color: #006600">
+                    <tr>
+                        <td class="titulo center" colspan="2">Evidencias de Conocimiento</td>
+                        <td class="titulo center">Porcentaje <br />40%</td>
+                    </tr>
+
+                    <tr>
+                        <td class="titulo center" width="19%">Criterios de Evaluación</td>
+                        <td class="titulo center">Descripción</td>
+                        <td class="titulo center" width="5%">Seleccione</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Manejo de expresiones lógico matemáticas</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Identifica los datos y las variables del caso de estudio o problema a resolver</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Identifica los ciclos cuantitativos y cualitativos</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Reconoce las estructuras cíclicas: Mientras, Para y Repetir Hasta.</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Interpreta el concepto de suiche o bandera.</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <table border="1" style="width: 98%; border-top-color: #006600 5px;"> 
+                    <tr>
+                        <td></td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="table-responsive" style="padding-right: 2%">
+                <table class="table table-striped" cellspacing="0" cellpadding="2" width="90%">
+                    <tr>
+                        <td class="titulo center" colspan="2">Evidencias de Desempeño</td>
+                        <td class="titulo center">Porcentaje <br />20%</td>
+                    </tr>
+
+                    <tr>
+                        <td class="titulo center" width="19%">Criterios de Evaluación</td>
+                        <td class="titulo center">Descripción</td>
+                        <td class="titulo center" width="5%">Seleccione</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Puntualidad en las tareas asignadas</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Trabajo autónomo</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Trabajo en Equipo</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Integración en equipo</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <table border="1" style="width: 98%; border-top-color: #006600 5px;"> 
+                    <tr>
+                        <td></td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="table-responsive" style="padding-right: 2%">
+                <table class="table table-striped" cellspacing="0" cellpadding="2" width="90%">
+                    <tr>
+                        <td class="titulo center" colspan="2">Evidencias de Producto</td>
+                        <td class="titulo center">Porcentaje <br />40%</td>
+                    </tr>
+
+                    <tr>
+                        <td class="titulo center" width="19%">Criterios de Evaluación</td>
+                        <td class="titulo center">Descripción</td>
+                        <td class="titulo center" width="5%">Seleccione</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Resuelve  problemas algorítmicos que requieran la implementación de estructuras condicionales inmplementandolos en un lenguaje de programación</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Aplicar las diferentes estructuras de decisión y control que respondan a los requerimientos del problema.</td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="center">CTO-000</td>
+                        <td>Solucionar problemas complejos, aplicando la técnica de dividir en subprogramas o módulos, con el fin de que se identifiquen las diferentes partes de una solución. </td>
+                        <td class="center"><input type="checkbox" name="transporte" value="1"></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div id="zona_buttons">
+                <table cellspacing="5" style="width: 70%; margin-top: 20px;">
+                    <tr>
+
+                        <td><a href=""><button style="width: 115px;" type="button" class="btn btn-success">Guardar</button></a></td>
+                        <td><button style="width: 115px;" type="button" class="btn btn-success">Consultar</button></td>
+                        <td><a href=""><button style="width: 115px;" type="button" class="btn btn-success">Modificar</button></a></td>
+                        <td><a href=""><button style="width: 115px;" type="button" class="btn btn-success">Cancelar</button></a></td>
+
+                    </tr>
+                </table>
+
+            </div>
+
+            <div id="copyright">
+                <p class="center">Politécnico Colombiano Jaime Isaza Cadavid</p>
+                <p class="center">Dirección: Carrera 48 N° 7 -151 Medellín - Colombia - Surámerica</p>
+                <p class="center">Linea de Atención al Cliente: 018000417654 - Conmutador: (574) 319 7900 - 444 7654</p>
+            </div>
+
+        </div>
+    </body>
+</html>

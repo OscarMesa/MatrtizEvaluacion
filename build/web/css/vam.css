@@ -1,0 +1,475 @@
+body {
+  //  background-color: #FAFAFA;
+    background-image: url('../images/fondo_poli.jpg');
+    background-attachment: fixed;
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    color: #000;
+    //font-family: "Trebuchet MS",Verdana,Geneva,Arial,helvetica,sans-serif;
+    font-family: 'Exo', sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+p{
+  font-family: 'Exo', sans-serif;
+}
+
+table{
+    font-family: 'Exo', sans-serif;
+}
+
+#zona_buttons{
+    margin-left: 21%;
+    margin-top: 5%;
+    width: 85%;
+}
+
+
+.zona1 {
+    padding: 10px 0px;
+    background-color: #FFF;
+    color: #000;
+}
+
+.zona5 {
+    padding: 0px 0px 10px;
+    background-color: #FFF;
+    color: #000;
+}
+
+.SourceSans{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+body {
+    /* min-width: (containers) */
+    min-width: 1200px;
+}
+
+body,input,textarea,select
+{
+    line-height: 1.75em;
+    font-size: 11pt;
+    letter-spacing: 0;
+}
+
+h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+
+    /* width: (containers) */
+    width: 1200px;
+}
+
+
+.login{  
+    margin-top:14%; 
+    margin-left:60%; 
+    padding:2%; 
+    background-color: #c8ccce; 
+    width: 25%; 
+    height:12%; 
+    border-radius: 6%; 
+}
+
+.contenido{
+    //font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Exo', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.titulo{
+    //font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Exo', sans-serif;
+    font-size: 17px;
+    font-variant: small-caps;
+    line-height: 1;
+
+}
+
+.campoObligatorio{
+    color: red;
+    font-size: 20px;
+}
+
+.titulo2{
+    //font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Exo', sans-serif;
+    font-size: 38px;
+    font-variant: small-caps;
+    text-align: center;
+    margin-top: 6%;
+    margin-bottom: 4%;
+}
+
+.subtitulo{
+    //font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Exo', sans-serif;
+    font-size: 25px;
+    font-variant: small-caps;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.titulo_formulario{
+    //font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Exo', sans-serif;
+    font-size: 38px;
+    font-variant: small-caps;
+    text-align: center;
+}
+
+.titulo1Login{
+    
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 49px;
+    font-variant: small-caps;
+    line-height: 1;
+}
+
+.titulo2Login{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 28px;
+    font-variant: small-caps;
+}
+
+.center{
+    text-align: center;
+}
+
+.select{
+    background: #eee;
+    background-position: 280px center;
+    background-repeat: no-repeat;
+    padding: 4px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.3);    
+}
+
+
+#copyright{
+    margin-top: 5%;
+    font-size: 12px; 
+    line-height: 5px;
+    margin-bottom: -2%;
+}
+
+#sidebar
+{
+    position: absolute;
+    top: 0;
+    padding: 3em 1.35em 1em 1.15em;
+    width: 14em; /* = whatever you want */
+    background: #364050 url('images/bg01.png');
+    box-shadow: inset -0.1em 0em 0.35em 0em rgba(0,0,0,0.15);
+}
+
+body.left-sidebar #sidebar
+{
+    left: 0;
+}
+
+
+// Table
+
+table
+{
+    width: 100%;
+}
+
+table.default
+{
+}
+
+table.default tbody tr:nth-child(2n+2)
+{
+    background: #f4f4f4;
+}
+
+table.default td
+{
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+table.default th
+{
+    text-align: left;
+    font-weight: 700;
+    padding: 0.75em 1em 0.75em 1em;
+}
+
+table.default thead
+{
+    border-bottom: solid 1px #ddd;
+}
+
+table.default tfoot
+{
+    border-top: solid 1px #ddd;
+    background: #eee;
+}
+
+table.default tbody
+{
+}
+
+/* Form */
+
+form
+{
+}
+
+form label
+{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 700;
+    color: #232323;
+    margin: 0 0 0.75em 0;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],			
+form select,
+form textarea
+{
+    display: block;
+    border-radius: 0.4em;
+    -webkit-appearance: none;
+    border: solid 1px #ddd;
+    padding: 0.5em 0.75em;
+    width: 100%;
+    line-height: 1.25em;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form select:focus,
+form textarea:focus
+{
+    box-shadow: 0px 0px 2px 2px #c94663;
+}
+
+form ::-webkit-input-placeholder
+{
+    color: #aaa;
+}
+
+form :-moz-placeholder
+{
+    color: #aaa;
+}
+
+form ::-moz-placeholder
+{
+    color: #aaa;
+}
+
+form :-ms-input-placeholder
+{
+    color: #aaa;
+}
+
+
+/* Form */
+
+form
+{
+}
+
+form label
+{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 700;
+    color: #232323;
+    margin: 0 0 0.75em 0;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],			
+form select,
+form textarea
+{
+    display: block;
+    border-radius: 0.4em;
+    -webkit-appearance: none;
+    border: solid 1px #ddd;
+    padding: 0.5em 0.75em;
+    width: 100%;
+    line-height: 1.25em;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form select:focus,
+form textarea:focus
+{
+    box-shadow: 0px 0px 2px 2px #c94663;
+}
+
+form ::-webkit-input-placeholder
+{
+    color: #aaa;
+}
+
+form :-moz-placeholder
+{
+    color: #aaa;
+}
+
+form ::-moz-placeholder
+{
+    color: #aaa;
+}
+
+form :-ms-input-placeholder
+{
+    color: #aaa;
+}
+
+
+/* Button */
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.button
+{
+    cursor: pointer;
+    background-color: #c94663;
+    background-image: url('images/bg01.png');
+    border-radius: 0.4em;
+    text-align: center;
+    box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15);
+    color: #fff;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    -moz-transition: background-color .25s ease-in-out, color .25s ease-in-out;
+    -webkit-transition: background-color .25s ease-in-out, color .25s ease-in-out;
+    -o-transition: background-color .25s ease-in-out, color .25s ease-in-out;
+    -ms-transition: background-color .25s ease-in-out, color .25s ease-in-out;
+    transition: background-color .25s ease-in-out, color .25s ease-in-out;
+    text-shadow: -1px -1px 0px rgba(0,0,0,0.5);
+}
+
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+input[type="reset"]:disabled,
+input[type="button"].disabled,
+input[type="submit"].disabled,
+input[type="reset"].disabled,
+.button.disabled
+{
+    opacity: 0.35;
+    cursor: default;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+.button:hover
+{
+    background-color: #d95673;
+}
+
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active,
+.button:active
+{
+    background-color: #b93653;
+}
+
+input[type="button"].alt,
+input[type="submit"].alt,
+input[type="reset"].alt,
+.button.alt
+{
+    background-color: #364050;
+}
+
+input[type="button"].alt:hover,
+input[type="submit"].alt:hover,
+input[type="reset"].alt:hover,
+.button.alt:hover
+{
+    background-color: #465060;
+}
+
+input[type="button"].alt:active,
+input[type="submit"].alt:active,
+input[type="reset"].alt:active,
+.button.alt:active
+{
+    background-color: #263040;
+}
+
+/* List */
+
+ul.default
+{
+    list-style: disc;
+    padding-left: 1em;
+}
+
+ul.default li
+{
+    padding-left: 0.5em;
+}
+
+ol.default
+{
+    list-style: decimal;
+    padding-left: 1.25em;
+}
+
+ol.default li
+{
+    padding-left: 0.25em;
+}
+
+/*********************************************************************************/
+/* Logo                                                                          */
+/*********************************************************************************/
+
+#logoa
+{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 17px;
+    font-variant: small-caps;
+    line-height: 1;
+    //font-family: 'Open Sans Condensed', sans-serif;
+    letter-spacing: 0.1em;
+}
+
+#logoa a
+{
+    display: block;
+    background-color: #006400;
+    background-image: url('images/bg01.png');
+    padding: 0.875em 0.25em;
+    border-radius: 0.2em;
+    text-align: center;
+    box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15), 0 0.025em 0.15em 0em rgba(0,0,0,0.25);
+    text-decoration: none;
+    color: #fff;
+}
