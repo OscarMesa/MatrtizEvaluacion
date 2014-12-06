@@ -22,9 +22,10 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
 
         <!-- Latest compiled and minified JavaScript -->
+        <script src="<c:url value="/js/jquery.min.js"/>"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="<c:url value="/libs/select2-3.5.2/select2.js"/>"></script>
-        <script src="<c:url value="/lib/select2-3.5.2/select2_locale_es.js"/>"></script>
+        <script src="<c:url value="/libs/select2-3.5.2/select2_locale_es.js"/>"></script>
         
         
     </head>
@@ -39,25 +40,25 @@
                     <tr>
                         <td style="vertical-align:text-top" class="titulo" width="20%">Módulo</td>
                         <td class="contenido">
-                            <input type="hidden" id="cmbModulo" style="width:950px;margin-bottom: 5px" class="input-xlarge" />
+                            <input type="hidden" id="cmbModulo" style="width:650px;margin-bottom: 5px" class="input-xlarge" />
                         </td>
                     </tr>
                     <tr>
                         <td style="vertical-align:text-top" class="titulo" width="20%">Norma de Competencia</td>
                         <td class="contenido">
-                            <input type="hidden" id="cmbNorma" style="width:950px;margin-bottom: 5px" class="input-xlarge" />
+                            <input type="hidden" id="cmbNorma" style="width:650px;margin-bottom: 5px" class="input-xlarge" />
                         </td>
                     </tr>
                     <tr>
                         <td style="vertical-align:text-top" class="titulo" width="20%">Elemento de Competencia</td>
                         <td class="contenido">
-                            <input type="hidden" id="cmbElemento" style="width:950px;margin-bottom: 5px" class="input-xlarge" />
+                            <input type="hidden" id="cmbElemento" style="width:650px;margin-bottom: 5px" class="input-xlarge" />
                         </td>
                     </tr>
                     <tr>
                         <td style="vertical-align:text-top" class="titulo" width="20%">Elemento de Competencia</td>
                         <td class="contenido">
-                            <input type="hidden" id="cmbElemento" style="width:950px;margin-bottom: 5px" class="input-xlarge" />
+                            <input type="hidden" id="cmbElemento" style="width:650px;margin-bottom: 5px" class="input-xlarge" />
                         </td>
                     </tr>
                 </table>
@@ -71,23 +72,24 @@
     $('#cmbModulo').select2({
         placeholder: 'Módulo a evaluar',
         ajax: {
-            url: "SvrEvaluacion",
+            url: "../SvrEvaluacion",
             dataType: 'json',
             quietMillis: 100,
             data: function (term, page) {
                 return {
+                    term: term,
                     action: 'obtenerModulos', //search term
                     page_limit: 10 // page size
                 };
             },
             results: function (data, page) {
-                return { results: data.results };
+                return { results: data };
             }
 
         },
         initSelection: function(element, callback) {
-            return $.getJSON("SvrEvaluacion"), null, function(data) {
-
+            return $.getJSON("../SvrEvaluacion", null, function(data) {
+                   
                     return callback(data);
 
             });
@@ -95,12 +97,32 @@
 
     });
 
-    $("#cmbMercancia_Envio_2").change(function() {
-        if($("#cmbMercancia_Envio_2").select2('data').id != 0)
-        $('#cajas-disponibles').html("Número de cajas disponibles: " + $("#cmbMercancia_Envio_2").select2('data').NumCajasDisponibles); 
-        else{
-            $('#cajas-disponibles').html("");
-            $('#cmbMercancia_Envio_2').select2('data', null);
+    $('#cmbNorma').select2({
+        placeholder: 'Norma a evaluar',
+        ajax: {
+            url: "../SvrEvaluacion",
+            dataType: 'json',
+            quietMillis: 100,
+            data: function (term, page) {
+                return {
+                    term: term,
+                    modulo:($("#cmbModulo").select2("data")!=null?$("#cmbModulo").select2("data").id:""),
+                    action: 'obtenerNorma', //search term
+                    page_limit: 10 // page size
+                };
+            },
+            results: function (data, page) {
+                return { results: data };
+            }
+
+        },
+        initSelection: function(element, callback) {
+            return $.getJSON("../SvrEvaluacion", null, function(data) {
+                   
+                    return callback(data);
+
+            });
         }
+
     });
 </script>

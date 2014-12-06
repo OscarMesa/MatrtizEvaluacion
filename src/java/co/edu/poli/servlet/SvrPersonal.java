@@ -52,14 +52,14 @@ public class SvrPersonal extends HttpServlet {
                         // out.println("Usuario no existe");
                             //   RequestDispatcher rd = request.getRequestDispatcher("/html/Login2.html");
                             // rd.include(request, response);
-                            out.println(user);
+                            //out.println(user);
                             request.setAttribute("existe", "Este usuario no se encuentra registrado");
 
                             RequestDispatcher dispatcher = request.getRequestDispatcher("html/Login2.jsp");
                             dispatcher.include(request, response);
                             //response.sendRedirect("html/Login2.jsp");
                         } else {
-                            out.println(user);
+                            //out.println(user);
                             // out.println(user);
                             request.getSession(true).setAttribute("usuario", user);
                             request.getSession().setMaxInactiveInterval(36000);

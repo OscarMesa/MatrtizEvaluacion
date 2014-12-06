@@ -12,7 +12,7 @@
         out.println("no existe");
         
     }else{
-    out.println(u);
+   // out.println(u);
     
 %>
 

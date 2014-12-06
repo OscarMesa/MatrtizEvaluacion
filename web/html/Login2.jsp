@@ -6,7 +6,7 @@
     Object u = request.getSession().getAttribute("usuario");
 
     if (u != null) {
-        out.println(u);
+       // out.println(u);
         request.setAttribute("existe", "No hay una sesión activa");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/html/Login2.jsp");
         //dispatcher.include(request, response);

@@ -6,9 +6,12 @@
 package co.edu.poli.servlet;
 
 import co.edu.poli.negocio.EvaluacionCtr;
+import co.edu.poli.util.JsonBean;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,10 +44,31 @@ public class SvrEvaluacion extends HttpServlet {
         if(action != null){
             
             if(action.equals("obtenerModulos")){
+                String termino = "";  
+                if(request.getParameter("term") != null){
+                    termino = request.getParameter("term");
+                }
                 Gson gson = new Gson();
-                String jsonModules = gson.toJson(evaluacion_controlador.obtenerModulos());
+                String jsonModules = gson.toJson(evaluacion_controlador.obtenerModulos(termino));
                 out.write(jsonModules);
                 return;
+            }else if(action.equals("obtenerNorma")){
+                if(request.getParameter("modulo") != null && !request.getParameter("modulo").endsWith("")){
+                String termino = "";  
+                if(request.getParameter("term") != null){
+                    termino = request.getParameter("term");
+                }
+                Gson gson = new Gson();
+                String jsonModules = gson.toJson(evaluacion_controlador.obtenerNormas(termino));
+                out.write(jsonModules);
+                }else{
+                    Gson gson = new Gson();
+                    JsonBean j = new JsonBean("0", "Debe seleccionar un modulo.", null);
+                    List<JsonBean> p =new ArrayList<>();
+                    p.add(j);
+                    String jsonModules = gson.toJson(p);
+                    out.write(jsonModules);
+                }
             }
         }
         

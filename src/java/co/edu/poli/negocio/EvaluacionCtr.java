@@ -10,6 +10,7 @@ import co.edu.poli.dao.modulos;
 import co.edu.poli.sql.EstadosSQL;
 import co.edu.poli.sql.EvaluacionSQL;
 import co.edu.poli.util.Conexion;
+import co.edu.poli.util.JsonBean;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import java.sql.Connection;
@@ -26,20 +27,27 @@ import java.util.logging.Logger;
  */
 public class EvaluacionCtr {
     
-    public ArrayList<modulos> obtenerModulos()
+    public ArrayList<JsonBean> obtenerModulos(String termino)
     {
         try {
             Connection con = Conexion.getConexion();
             PreparedStatement st = con.prepareStatement(EvaluacionSQL.CargarModulos());
+            st.setString(1, "%"+termino+"%");
+            st.setString(2, "%"+termino+"%");
+            st.setString(3, "%"+termino+"%");
+            st.setString(4, "%"+termino+"%");
+            st.setString(5, "%"+termino+"%");
+            System.out.println(st);
             ResultSet r = st.executeQuery();
-            ArrayList<modulos> modulos = new ArrayList<>();
-            while (r.next()) {                
+            ArrayList<JsonBean> modulos = new ArrayList<>();
+            while (r.next()) {                 
                 modulos e = new modulos();
                 e.setCodigo(r.getString("codigo"));
                 e.setDescripcion(r.getString("descripcion"));
                 e.setGrado(r.getString("grado"));
                 e.setGrado(r.getString("grado"));
-                modulos.add(e);
+                JsonBean j = new JsonBean(r.getString("codigo"),r.getString("descripcion"),e);
+                modulos.add(j);
             }
             return modulos;
         } catch (SQLException ex) {
@@ -50,7 +58,11 @@ public class EvaluacionCtr {
     
     
     public static void main(String[] args) {
-        new EvaluacionCtr().obtenerModulos();
+//        new EvaluacionCtr().obtenerModulos();
+    }
+
+    public Object obtenerNormas(String termino) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

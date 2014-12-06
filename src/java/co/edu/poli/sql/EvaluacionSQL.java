@@ -16,6 +16,6 @@ public class EvaluacionSQL {
      */
     public static String CargarModulos()
     {
-        return "SELECT * FROM modulos";
+        return "SELECT * FROM modulos WHERE Codigo LIKE ? OR Descripcion LIKE ? OR Grado LIKE ? OR YearI LIKE ? OR YearF LIKE ? LIMIT 10";
     }
 }

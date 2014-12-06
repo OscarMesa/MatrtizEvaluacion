@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.poli.ces3.crud;
+package co.edu.poli.util;
 
 /**
  *
@@ -25,7 +25,7 @@ public class SQL {
         Connection con = null;
         
         try{
-            String url = "jdbc:mysql://localhost/ise";
+            String url = "jdbc:mysql://localhost/sistema_competencias";
             String user = "root";
             String password = "root";
             Class.forName("com.mysql.jdbc.Driver");
