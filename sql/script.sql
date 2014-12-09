@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2014-11-17 23:02:05
+Date: 2014-12-08 23:45:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,7 +57,44 @@ AUTO_INCREMENT=5
 -- Records of elementos
 -- ----------------------------
 BEGIN;
-INSERT INTO `elementos` VALUES ('1', '', 'Construye los algoritmos para el caso de estudio o problema de acuerdo con la metodología seleccionada y las especificaciones dadas por el cliente. '), ('2', '', 'Construye los algoritmos para el caso de estudio o problema de acuerdo con la metodología seleccionada y las especificaciones dadas por el cliente. '), ('3', '', 'Construye los algoritmos para el caso de estudio o problema de acuerdo con la metodología seleccionada y las especificaciones dadas por el cliente. '), ('4', '', 'Construye los algoritmos para el caso de estudio o problema de acuerdo con la metodología seleccionada y las especificaciones dadas por el cliente. ');
+INSERT INTO `elementos` VALUES ('1', 'AWQ1', 'Construye los algoritmos para el caso de estudio o problema de acuerdo con la metodología seleccionada y las especificaciones dadas por el cliente. '), ('2', '4EWR', 'Construye los algoritmos para el caso de estudio o problema de acuerdo con la metodología seleccionada y las especificaciones dadas por el cliente. '), ('3', 'RTE2', 'Construye los algoritmos para el caso de estudio o problema de acuerdo con la metodología seleccionada y las especificaciones dadas por el cliente. '), ('4', 'K1nU3', 'Construye los algoritmos para el caso de estudio o problema de acuerdo con la metodología seleccionada y las especificaciones dadas por el cliente. ');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for `encabezado_evaluacion`
+-- ----------------------------
+DROP TABLE IF EXISTS `encabezado_evaluacion`;
+CREATE TABLE `encabezado_evaluacion` (
+`id_encabezado`  int(5) NOT NULL AUTO_INCREMENT ,
+`id_modulo`  varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`id_norma`  int(5) NULL DEFAULT NULL ,
+`id_elemento`  int(5) NULL DEFAULT NULL ,
+`id_resultado`  int(5) NULL DEFAULT NULL ,
+`id_evidencia`  int(5) NULL DEFAULT NULL ,
+`descripcion`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`id_encabezado`),
+FOREIGN KEY (`id_modulo`) REFERENCES `modulos` (`Codigo`) ON DELETE RESTRICT ON UPDATE CASCADE,
+FOREIGN KEY (`id_norma`) REFERENCES `norma` (`id_norma`) ON DELETE RESTRICT ON UPDATE CASCADE,
+FOREIGN KEY (`id_elemento`) REFERENCES `elementos` (`id_elemento`) ON DELETE RESTRICT ON UPDATE CASCADE,
+FOREIGN KEY (`id_resultado`) REFERENCES `resultado_aprendizaje` (`id_resultado`) ON DELETE RESTRICT ON UPDATE CASCADE,
+FOREIGN KEY (`id_evidencia`) REFERENCES `evidencia` (`id_evidencia`) ON DELETE RESTRICT ON UPDATE CASCADE,
+INDEX `fk_modulo` (`id_modulo`) USING BTREE ,
+INDEX `fk_norma` (`id_norma`) USING BTREE ,
+INDEX `fk_elemento` (`id_elemento`) USING BTREE ,
+INDEX `fk_resultado` (`id_resultado`) USING BTREE ,
+INDEX `fk_evidencia` (`id_evidencia`) USING BTREE 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=9
+
+;
+
+-- ----------------------------
+-- Records of encabezado_evaluacion
+-- ----------------------------
+BEGIN;
+INSERT INTO `encabezado_evaluacion` VALUES ('1', 'ING00812', '3', '1', '1', '1', 'preuba'), ('2', 'ING00812', '2', '1', '1', '1', 'oscar esta es una prueba'), ('3', 'ING00812', '3', '1', '1', '1', 'esta es otra preuab'), ('4', 'ING00812', '2', '2', '1', '3', 'otra prueba'), ('5', 'ING00812', '3', '1', '1', '1', 'otheer fukin prueba'), ('6', 'ING00812', '2', '3', '1', '3', 'otra '), ('7', 'ING00812', '2', '2', '1', '3', 'con otra descripcion y full hdf'), ('8', 'ING00812', '3', '1', '1', '3', 'hola');
 COMMIT;
 
 -- ----------------------------
@@ -168,7 +205,7 @@ AUTO_INCREMENT=4
 -- Records of evidencia
 -- ----------------------------
 BEGIN;
-INSERT INTO `evidencia` VALUES ('1', '2', '1', 'ninguna', '30'), ('2', '2', '2', 'ninguna', '20'), ('3', '2', '3', 'ninguna', '50');
+INSERT INTO `evidencia` VALUES ('1', 'ING00812', '1', 'ninguna', '30'), ('2', '2', '2', 'ninguna', '20'), ('3', 'ING00812', '3', 'ninguna', '50');
 COMMIT;
 
 -- ----------------------------
@@ -389,7 +426,7 @@ INDEX `fk_estado` (`estado`) USING BTREE
 )
 ENGINE=InnoDB
 DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
-AUTO_INCREMENT=8
+AUTO_INCREMENT=9
 
 ;
 
@@ -397,7 +434,7 @@ AUTO_INCREMENT=8
 -- Records of norma
 -- ----------------------------
 BEGIN;
-INSERT INTO `norma` VALUES ('1', 'CDO-005', 'Desarrollar una ...', '0'), ('2', 'CDO-002', 'Desarrollar el sistema que cumpla con los requerimientos de la solución informática', '1'), ('3', 'CDO-003', 'Desarrollar el sistema que cumpla con los requerimientos de la solución informática', '1'), ('4', 'CDO-004', 'hola mundo', '1'), ('5', 'null', 'null', '1'), ('6', 'dsf', 'sdf', '1');
+INSERT INTO `norma` VALUES ('1', 'CDO-005', 'Desarrollar una ...', '0'), ('2', 'CDO-002', 'Desarrollar el sistema que cumpla con los requerimientos de la solución informática', '1'), ('3', 'CDO-003', 'Desarrollar el sistema que cumpla con los requerimientos de la solución informática', '1'), ('4', 'CDO-004', 'hola mundo', '1'), ('5', 'null', 'null', '1'), ('6', 'dsf', 'sdf', '1'), ('7', 'EWQ3', 'hola hola', null), ('8', 'asdf', 'fasdf', null);
 COMMIT;
 
 -- ----------------------------
@@ -416,7 +453,7 @@ INDEX `elemento` (`id_elemento`) USING BTREE
 )
 ENGINE=InnoDB
 DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
-AUTO_INCREMENT=5
+AUTO_INCREMENT=8
 
 ;
 
@@ -424,7 +461,7 @@ AUTO_INCREMENT=5
 -- Records of normas_elementos
 -- ----------------------------
 BEGIN;
-INSERT INTO `normas_elementos` VALUES ('3', '1', '1'), ('1', '1', '2'), ('4', '2', '3');
+INSERT INTO `normas_elementos` VALUES ('1', '1', '2'), ('5', '2', '1'), ('7', '2', '2'), ('4', '2', '3'), ('3', '3', '1');
 COMMIT;
 
 -- ----------------------------
@@ -568,6 +605,11 @@ ALTER TABLE `criterio_evaluacion` AUTO_INCREMENT=8;
 ALTER TABLE `elementos` AUTO_INCREMENT=5;
 
 -- ----------------------------
+-- Auto increment value for `encabezado_evaluacion`
+-- ----------------------------
+ALTER TABLE `encabezado_evaluacion` AUTO_INCREMENT=9;
+
+-- ----------------------------
 -- Auto increment value for `evalua_criterio_estudiante`
 -- ----------------------------
 ALTER TABLE `evalua_criterio_estudiante` AUTO_INCREMENT=7;
@@ -595,12 +637,12 @@ ALTER TABLE `modulo_norma` AUTO_INCREMENT=7;
 -- ----------------------------
 -- Auto increment value for `norma`
 -- ----------------------------
-ALTER TABLE `norma` AUTO_INCREMENT=8;
+ALTER TABLE `norma` AUTO_INCREMENT=9;
 
 -- ----------------------------
 -- Auto increment value for `normas_elementos`
 -- ----------------------------
-ALTER TABLE `normas_elementos` AUTO_INCREMENT=5;
+ALTER TABLE `normas_elementos` AUTO_INCREMENT=8;
 
 -- ----------------------------
 -- Auto increment value for `resultado_aprendizaje`
