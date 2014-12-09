@@ -140,7 +140,7 @@ public class generator {
     
     public static void main(String[] args){
         generator class1 = new generator();
-        class1.setNameClass("norma");
+        class1.setNameClass("encabezado_evaluacion");
         class1.WhireCode();
     }
 }

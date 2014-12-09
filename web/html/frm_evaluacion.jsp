@@ -7,20 +7,8 @@
 <html>
     <head>
         <title>Evaluación Estudiante</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <link rel="stylesheet" href="<c:url value="/css/vam.css"/>" />
-        <link rel="stylesheet" href="<c:url value="/css/estilo_menu.css"/>" />
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+        
+        <%@include file="archivos_head.jsp" %>
     </head>
     <body>
        <%@include file="banner_menu.jsp" %>
@@ -88,7 +76,7 @@
                     </tr>
                     <tr>
                         <td style="vertical-align: text-top" class="titulo" >Resultado de Aprendizaje</td>
-                        <td><p class="contenido">Identifica la secuencia de pasos lógicos o acciones a realizar a partir de la interpretación del diseÃ±o del sistema o caso de estudio, aplicando las diferentes estructuras de decisión y control que respondan a los requerimientos del problema</p></td>
+                        <td><p class="contenido">Identifica la secuencia de pasos lógicos o acciones a realizar a partir de la interpretación del diseño del sistema o caso de estudio, aplicando las diferentes estructuras de decisión y control que respondan a los requerimientos del problema</p></td>
                     </tr>
                     <tr>
                         <td  style="vertical-align:text-top" class="titulo">Nota Final</td>
@@ -138,10 +126,10 @@
 
                     <tr>
                         <td>Manejo de expresiones lógico matemáticas</td>
-                        <td>No escribe correctamente expresiones algebraicas, aplicadas al diseÃ±o de algoritmos.</td>
-                        <td>Escribe correctamente algunas expresiones algebraicas, aplicadas al diseÃ±o de algoritmos.</td>
-                        <td>Escribe correctamente la mayoría de expresiones algebraicas, aplicadas al diseÃ±o de algoritmos.</td>
-                        <td>Escribe correctamente todas las expresiones algebraicas, aplicadas al diseÃ±o de algoritmos.</td>
+                        <td>No escribe correctamente expresiones algebraicas, aplicadas al diseño de algoritmos.</td>
+                        <td>Escribe correctamente algunas expresiones algebraicas, aplicadas al diseño de algoritmos.</td>
+                        <td>Escribe correctamente la mayoría de expresiones algebraicas, aplicadas al diseño de algoritmos.</td>
+                        <td>Escribe correctamente todas las expresiones algebraicas, aplicadas al diseño de algoritmos.</td>
                         <td class="center"><select class="select" style="width:70%; height: 30px;">
                                 <option value="0">---</option>
                                 <option value="1">0</option>
@@ -231,7 +219,7 @@
             <div class="table-responsive" style="padding-right: 2%">
                 <table class="table table-striped" cellspacing="0" cellpadding="2" width="90%">
                     <tr>
-                        <td class="titulo center" colspan="2">Evidencia de DesempeÃ±o</td>
+                        <td class="titulo center" colspan="2">Evidencia de Desempeño</td>
                         <td class="titulo center">Porcentaje</td>
                         <td class="titulo center">20%</td>
                         <td class="titulo center">Total de Puntos</td>
@@ -377,11 +365,11 @@
                     
                     
                        <tr>
-                        <td>Solucionar problemas complejos, aplicando la tÃ©cnica de dividir en subprogramas o módulos, con el fin de que se identifiquen las diferentes partes de una solución. </td>
-                        <td>No Soluciona problemas complejos o los intenta solucionar pero no aplica la tÃ©cnica de dividir en subprogramas.</td>
-                        <td>Soluciona parcialmente problemas complejos, pero aplica de forma insuficiente la tÃ©cnica de dividir en subprogramas.</td>
-                        <td>Soluciona problemas complejos,  aplica de forma aceptable la tÃ©cnica de dividir en subprogramas.</td>
-                        <td>Soluciona correctamente problemas complejos, aplicando la tÃ©cnica de dividir en subprogramas e identifica las diferentes partes de una solución. </td>
+                        <td>Solucionar problemas complejos, aplicando la técnica de dividir en subprogramas o módulos, con el fin de que se identifiquen las diferentes partes de una solución. </td>
+                        <td>No Soluciona problemas complejos o los intenta solucionar pero no aplica la técnica de dividir en subprogramas.</td>
+                        <td>Soluciona parcialmente problemas complejos, pero aplica de forma insuficiente la técnica de dividir en subprogramas.</td>
+                        <td>Soluciona problemas complejos,  aplica de forma aceptable la técnica de dividir en subprogramas.</td>
+                        <td>Soluciona correctamente problemas complejos, aplicando la técnica de dividir en subprogramas e identifica las diferentes partes de una solución. </td>
                         <td class="center"><select class="select" style="width:70%; height: 30px;">
                                 <option value="0">---</option>
                                 <option value="1">0</option>
@@ -406,16 +394,7 @@
                 </table>
 
             </div>
-
-            <div id="copyright">
-                <p class="center">PolitÃ©cnico Colombiano Jaime Isaza Cadavid</p>
-                <p class="center">Dirección: Carrera 48 NÂ° 7 -151 Medellín - Colombia - Surámerica</p>
-                <p class="center">Linea de Atención al Cliente: 018000417654 - Conmutador: (574) 319 7900 - 444 7654</p>
-            </div>
-            
-            
-            
-
+            <%@include file="pie_pag.jsp" %>
         </div>
     </body>
 </html>

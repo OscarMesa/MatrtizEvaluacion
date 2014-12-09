@@ -7,20 +7,7 @@
 <html>
     <head>
         <title>Ítems de Evaluación</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <link rel="stylesheet" href="<c:url value="/css/vam.css"/>" />
-        <link rel="stylesheet" href="<c:url value="/css/estilo_menu.css"/>" />
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+        <%@include file="archivos_head.jsp" %>
     </head>
     <body>
         <header>
@@ -77,7 +64,7 @@
 
                     <tr>
                         <td class="center">CTO-000</td>
-                        <td>Manejo de expresiones lógico matemÃ¡ticas</td>
+                        <td>Manejo de expresiones lógico matemáticas</td>
                         <td class="center"><input type="checkbox" name="transporte" value="1"></td>
                     </tr>
 
@@ -119,7 +106,7 @@
             <div class="table-responsive" style="padding-right: 2%">
                 <table class="table table-striped" cellspacing="0" cellpadding="2" width="90%">
                     <tr>
-                        <td class="titulo center" colspan="2">Evidencias de DesempeÃ±o</td>
+                        <td class="titulo center" colspan="2">Evidencias de Desempeño</td>
                         <td class="titulo center">Porcentaje <br />20%</td>
                     </tr>
 
@@ -197,7 +184,7 @@
 
                     <tr>
                         <td class="center">CTO-000</td>
-                        <td>Solucionar problemas complejos, aplicando la tÃ©cnica de dividir en subprogramas o módulos, con el fin de que se identifiquen las diferentes partes de una solución. </td>
+                        <td>Solucionar problemas complejos, aplicando la técnica de dividir en subprogramas o módulos, con el fin de que se identifiquen las diferentes partes de una solución. </td>
                         <td class="center"><input type="checkbox" name="transporte" value="1"></td>
                     </tr>
                 </table>
@@ -216,13 +203,7 @@
                 </table>
 
             </div>
-
-            <div id="copyright">
-                <p class="center">PolitÃ©cnico Colombiano Jaime Isaza Cadavid</p>
-                <p class="center">Dirección: Carrera 48 NÂ° 7 -151 Medellín - Colombia - SurÃ¡merica</p>
-                <p class="center">Linea de Atención al Cliente: 018000417654 - Conmutador: (574) 319 7900 - 444 7654</p>
-            </div>
-
+            <%@include file="pie_pag.jsp" %>
         </div>
     </body>
 </html>
