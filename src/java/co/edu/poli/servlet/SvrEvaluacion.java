@@ -6,8 +6,12 @@
 package co.edu.poli.servlet;
 
 import co.edu.poli.dao.encabezado_evaluacion;
+import co.edu.poli.dao.grid.Gencabezado_evaluacion;
 import co.edu.poli.negocio.EvaluacionCtr;
 import co.edu.poli.util.JsonBean;
+import co.edu.poli.util.jqgrid.Data;
+import co.edu.poli.util.jqgrid.JqGridData;
+import co.edu.poli.util.jqgrid.Person;
 import co.edu.poli.util.rules;
 import co.edu.poli.util.searchOperation;
 import com.google.gson.Gson;
@@ -30,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SvrEvaluacion extends HttpServlet {
 
+    private static final long serialVersionUID = 1L;
     public PrintWriter out;
 
     /**
@@ -67,7 +72,7 @@ public class SvrEvaluacion extends HttpServlet {
                         termino = request.getParameter("term");
                     }
                     Gson gson = new Gson();
-                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerNormas(request.getParameter("modulo"),termino));
+                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerNormas(request.getParameter("modulo"), termino));
                     out.write(jsonModules);
                 } else {
                     Gson gson = new Gson();
@@ -77,14 +82,14 @@ public class SvrEvaluacion extends HttpServlet {
                     String jsonModules = gson.toJson(p);
                     out.write(jsonModules);
                 }
-            }else if (action.equals("obtenerElemento")) {
+            } else if (action.equals("obtenerElemento")) {
                 if (request.getParameter("norma") != null && request.getParameter("norma").length() > 0) {
                     String termino = "";
                     if (request.getParameter("term") != null) {
                         termino = request.getParameter("term");
                     }
                     Gson gson = new Gson();
-                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerElementos(request.getParameter("norma"),termino));
+                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerElementos(request.getParameter("norma"), termino));
                     out.write(jsonModules);
                 } else {
                     Gson gson = new Gson();
@@ -94,14 +99,14 @@ public class SvrEvaluacion extends HttpServlet {
                     String jsonModules = gson.toJson(p);
                     out.write(jsonModules);
                 }
-            }else if (action.equals("obtenerResultado")) {
+            } else if (action.equals("obtenerResultado")) {
                 if (request.getParameter("modulo") != null && request.getParameter("modulo").length() > 0) {
                     String termino = "";
                     if (request.getParameter("term") != null) {
                         termino = request.getParameter("term");
                     }
                     Gson gson = new Gson();
-                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerResultados(request.getParameter("modulo"),termino));
+                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerResultados(request.getParameter("modulo"), termino));
                     out.write(jsonModules);
                 } else {
                     Gson gson = new Gson();
@@ -111,14 +116,14 @@ public class SvrEvaluacion extends HttpServlet {
                     String jsonModules = gson.toJson(p);
                     out.write(jsonModules);
                 }
-            }else if(action.equals("obtenerEvidencia")){
+            } else if (action.equals("obtenerEvidencia")) {
                 if (request.getParameter("modulo") != null && request.getParameter("modulo").length() > 0) {
                     String termino = "";
                     if (request.getParameter("term") != null) {
                         termino = request.getParameter("term");
                     }
                     Gson gson = new Gson();
-                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerEvidencia(request.getParameter("modulo"),termino));
+                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerEvidencia(request.getParameter("modulo"), termino));
                     out.write(jsonModules);
                 } else {
                     Gson gson = new Gson();
@@ -128,7 +133,7 @@ public class SvrEvaluacion extends HttpServlet {
                     String jsonModules = gson.toJson(p);
                     out.write(jsonModules);
                 }
-            }else if (action.equals("guardarEncabezadoEvaluacion")) {
+            } else if (action.equals("guardarEncabezadoEvaluacion")) {
                 encabezado_evaluacion encabezado = new encabezado_evaluacion();
                 encabezado.setDescripcion(request.getParameter("descripcion"));
                 encabezado.setId_elemento(Integer.parseInt(request.getParameter("cmbElemento")));
@@ -139,110 +144,15 @@ public class SvrEvaluacion extends HttpServlet {
                 Gson respuesta = new Gson();
                 String jsonModules = respuesta.toJson(evaluacion_controlador.guardarEncabezadoEvaluacion(encabezado));
                 out.write(jsonModules);
-            }else if(action.equals("list-encabezado")){
-                encabezado_evaluacion encabezado = new encabezado_evaluacion();
-                double page = Integer.parseInt(request.getParameter("page")); // get the requested page
-		double limit = Integer.parseInt(request.getParameter("rows")); // get how many rows we want to have into the grid
-		double sidx =  Integer.parseInt(request.getParameter("sidx")); // get index row - i.e. user click to sort
-		double sord = Integer.parseInt(request.getParameter("sord")); // get the direction
-                double start;
-		if(request.getParameter("sidx")==null) sidx =1;
-
-		boolean search = request.getParameter("_search")!=null?(request.getParameter("_search").equals("true")?true:false):false;
-                
-                Field campo = null;
-                try {
-                    campo = evaluacion_controlador.obj_searchOperation.getClass().getDeclaredField(String.valueOf(request.getParameter("searchOper")));
-                } catch (NoSuchFieldException ex) {
-                    Logger.getLogger(SvrEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SecurityException ex) {
-                    Logger.getLogger(SvrEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                campo.setAccessible(true);
-                try {
-                    evaluacion_controlador.setWhere(search?(" WHERE "+String.format(campo.get(new rules()).toString(),String.valueOf(request.getParameter("searchField")),String.valueOf(request.getParameter("searchString")))):"");
-                } catch (IllegalArgumentException ex) {
-                    Logger.getLogger(SvrEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(SvrEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                HashMap modulo = new HashMap<>();
-                modulo.put("tbl", "modulos");
-                modulo.put("alias", "m");
-                modulo.put("campo", "Descripcion");
-		evaluacion_controlador.camposForaneos.put("modulo", modulo);
-                
-                HashMap norma = new HashMap<>();
-                norma.put("tbl", "norma");
-                norma.put("alias", "n");
-                norma.put("campo", "codigo_norma");
-                evaluacion_controlador.camposForaneos.put("norma", norma);
-                
-                HashMap resultado = new HashMap<>();
-                resultado.put("tbl", "resultado_aprendizaje");
-                resultado.put("alias", "ra");
-                resultado.put("campo", "codigo_resultado");
-                evaluacion_controlador.camposForaneos.put("resultado", resultado);
-                
-                HashMap evidencia = new HashMap<>();
-                evidencia.put("tbl", "evidencia");
-                evidencia.put("alias", "e");
-                evidencia.put("campo", "descripcion");
-                evaluacion_controlador.camposForaneos.put("evidencia", evidencia);
-                
-                HashMap codigo_elemento = new HashMap<>();
-                codigo_elemento.put("tbl", "elementos");
-                codigo_elemento.put("alias", "el");
-                codigo_elemento.put("campo", "codigo_elemento");
-                evaluacion_controlador.camposForaneos.put("codigo_elemento", codigo_elemento);
-               
-                HashMap descripcion_encab = new HashMap<>();
-                descripcion_encab.put("tbl", "encabezado_evaluacion");
-                descripcion_encab.put("alias", "ee");
-                descripcion_encab.put("campo", "descripcion");
-                evaluacion_controlador.camposForaneos.put("descripcion_encab", descripcion_encab);
-                
-                HashMap id_encabezado = new HashMap<>();
-                id_encabezado.put("tbl", "encabezado_evaluacion");
-                id_encabezado.put("alias", "ee");
-                id_encabezado.put("campo", "id_encabezado");
-                evaluacion_controlador.camposForaneos.put("id_encabezado", id_encabezado);
-                
-                HashMap resultado1 = new HashMap<>();
-                resultado1.put("tbl", "resultado_aprendizaje");
-                resultado1.put("alias", "ra");
-                resultado1.put("campo", "codigo_resultado");
-                evaluacion_controlador.camposForaneos.put("resultado", resultado1);
-               
-		if (request.getParameter("_search")!=null && request.getParameter("_search").equals("true") && request.getParameter("filters")!=null && request.getParameter("filters").length()>0) {
-			evaluacion_controlador.setWhere(" WHERE ");
-                        Gson json = new Gson();
-			searchOperation filters = json.fromJson(request.getParameter("filters").toString(),searchOperation.class);
-			String comp = filters.getGroupOp();
-                        rules rules = json.fromJson(filters.getRules(),rules.class);
-			for (Field campoo : rules.getClass().getDeclaredFields()) {
-                            System.out.println(campoo);
-                            //$field->field = isset($this->objQuerys->camposForaneos[$field->field])?($this->objQuerys->camposForaneos[$field->field]['alias'].".".$field->field):$field->field;
-                            //$this->objQuerys->where .= sprintf($this->objQuerys->array_searchOperation[$field->op],$field->field,$field->data)." ".$comp." ";
-			}
-			//if(strlen($this->objQuerys->where) > 0)$this->objQuerys->where = substr($this->objQuerys->where,0,-4);
-		}
-
-		int count = evaluacion_controlador.CountEncabezadoEvaluacion();
-                double total_pages;
-		if( count >0 ) {
-			total_pages = Math.ceil(count/limit);
-		} else { 
-			total_pages = 0;
-		}
-		if (page > total_pages) page=total_pages;
-		start = total_pages==0?0:(limit*page - limit); // do not put $limit*($page - 1)
-
-//		responce = $this->objQuerys->GetEnviosByContenedor($sidx, $sord, $start , $limit, $total_pages);
-//
-//		    
-//		echo json_encode($responce);
+            } else if (action.equals("list-encabezado")) {
+                int totalRows = Integer.parseInt(String.valueOf(request.getParameter("rows")));
+                int currentPageNumber = Integer.parseInt(String.valueOf(request.getParameter("page")));;
+                int limitNumber = request.getParameter("limit") != null ? Integer.parseInt(request.getParameter("limit")) : 0;
+                int sidxNumber = request.getParameter("sidx") != null && !request.getParameter("sidx").equals("") ? Integer.parseInt(request.getParameter("sidx")) : 0;
+                String sordSerch = request.getParameter("sord") != null ? String.valueOf(request.getParameter("sord")) : "";
+                boolean search = request.getParameter("_search") != null ? Boolean.parseBoolean(request.getParameter("_search")) : false;
+                String res = evaluacion_controlador.getEncabezadosEvaluacion(currentPageNumber, limitNumber, sidxNumber, sordSerch, search, totalRows);
+                response.getWriter().write(res);
             }
         }
 

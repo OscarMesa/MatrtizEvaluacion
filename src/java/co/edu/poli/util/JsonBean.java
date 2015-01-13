@@ -7,7 +7,7 @@ package co.edu.poli.util;
 
 /**
  *
- * @author omesagar
+ * @author 
  */
 public class JsonBean {
     

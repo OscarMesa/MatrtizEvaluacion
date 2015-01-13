@@ -9,6 +9,7 @@ import co.edu.poli.dao.elementos;
 import co.edu.poli.dao.encabezado_evaluacion;
 import co.edu.poli.dao.estado;
 import co.edu.poli.dao.evidencia;
+import co.edu.poli.dao.grid.Gencabezado_evaluacion;
 import co.edu.poli.dao.modulos;
 import co.edu.poli.dao.norma;
 import co.edu.poli.dao.resultado_aprendizaje;
@@ -16,6 +17,9 @@ import co.edu.poli.sql.EstadosSQL;
 import co.edu.poli.sql.EvaluacionSQL;
 import co.edu.poli.util.Conexion;
 import co.edu.poli.util.JsonBean;
+import co.edu.poli.util.jqgrid.JqGridData;
+import co.edu.poli.util.jqgrid.campoTabla;
+import co.edu.poli.util.jqgrid.tablaForanea;
 import co.edu.poli.util.rules;
 import co.edu.poli.util.searchOperation;
 import com.google.gson.Gson;
@@ -26,6 +30,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,10 +40,10 @@ import java.util.logging.Logger;
  * @author omesagar
  */
 public class EvaluacionCtr {
-    
+
     private StringBuilder where;
-    public  rules obj_searchOperation;
-    public  HashMap<String,HashMap<String,String>> camposForaneos;
+    public rules obj_searchOperation;
+    public HashMap<String, HashMap<String, String>> camposForaneos;
 
     public EvaluacionCtr() {
         obj_searchOperation = new rules();
@@ -56,18 +61,16 @@ public class EvaluacionCtr {
         obj_searchOperation.setNi("%s NOT IN(%s)");
         where = new StringBuilder();
     }
-    
+
     public void setWhere(String _where_) {
         where = new StringBuilder(_where_);
     }
-    
-    public void appendWhere(String x)
-    {
+
+    public void appendWhere(String x) {
         where.append(x);
     }
-    
-    public String getWhere()
-    {
+
+    public String getWhere() {
         return this.where.toString();
     }
 
@@ -97,10 +100,6 @@ public class EvaluacionCtr {
             Logger.getLogger(EstadosCtr.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-//        new EvaluacionCtr().obtenerModulos();
     }
 
     public Object obtenerNormas(String modulo, String termino) {
@@ -249,21 +248,103 @@ public class EvaluacionCtr {
         }
         return resultado;
     }
-    
-    public int CountEncabezadoEvaluacion()
-    {
+
+    public int CountEncabezadoEvaluacion() {
         try {
             Connection con = Conexion.getConexion();
             PreparedStatement st = con.prepareStatement(EvaluacionSQL.coutnEncabezadoEvaluacionList(this.where.toString()));
             ResultSet r = st.executeQuery();
-            if(r.next())
+            if (r.next()) {
                 return r.getInt("count");
-        }catch(SQLException e)
-        {
+            }
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return 0;
     }
+    
+    public ArrayList<campoTabla> generarCampsoReporteEncabezadoTabla() throws Exception 
+    {
+   
+        ArrayList campos = new ArrayList<campoTabla>();
+        tablaForanea<encabezado_evaluacion> campoForaneo;
+        campoTabla campo = new campoTabla("id_encabezado", "id_encabezado", true, false);
+        campos.add(campo);
+        
+        campo = new campoTabla("descripcion", "descripcion_encab", true, false);
+        campos.add(campo);
+        
+        
+        campo = new campoTabla("id_modulo", "id_modulo", false, true);
+        campoForaneo = new tablaForanea();
+        campoForaneo.setTabla("modulos");
+        campoForaneo.setCampo("Codigo");
+        campoForaneo.setAlias("cod");
+        campoForaneo.agregarCampoForaneo("Codigo", "modulo");
+        campo.setForaneo(campoForaneo);
+        campos.add(campo);
+        
+        campo = new campoTabla("id_evidencia", "id_evidencia", false, true);
+        campoForaneo = new tablaForanea();
+        campoForaneo.setTabla("evidencia");
+        campoForaneo.setCampo("id_evidencia");
+        campoForaneo.setAlias("id_evidencia");
+        campoForaneo.agregarCampoForaneo("descripcion", "evidencia");
+        campo.setForaneo(campoForaneo);
+        campos.add(campo);
+        
+        campo = new campoTabla("id_elemento", "id_elemento", false, true);
+        campoForaneo = new tablaForanea();
+        campoForaneo.setTabla("elementos");
+        campoForaneo.setCampo("id_elemento");
+        campoForaneo.setAlias("id_elemento");
+        campoForaneo.agregarCampoForaneo("descripcion", "elemento");
+        campo.setForaneo(campoForaneo);
+        campos.add(campo);
+        
+        campo = new campoTabla("id_norma", "id_norma", false, true);
+        campoForaneo = new tablaForanea();
+        campoForaneo.setTabla("norma");
+        campoForaneo.setCampo("id_norma");
+        campoForaneo.setAlias("id_norma");
+        campoForaneo.agregarCampoForaneo("codigo_norma", "norma");
+        campo.setForaneo(campoForaneo);
+        campos.add(campo);
+        
+        campo = new campoTabla("id_resultado", "id_resultado", false, true);
+        campoForaneo = new tablaForanea();
+        campoForaneo.setTabla("resultado_aprendizaje");
+        campoForaneo.setCampo("id_resultado");
+        campoForaneo.setAlias("id_resultado");
+        campoForaneo.agregarCampoForaneo("codigo_resultado", "resultado");
+        campo.setForaneo(campoForaneo);
+        campos.add(campo);
+        
+        
+        
+        
+        return campos;
+    }
+    
+    public String getEncabezadosEvaluacion(int currentPageNumber, int limitNumber, int sidxNumber, String sordSerch, boolean search, int totalRows) {
+        try {
+            JqGridData<encabezado_evaluacion, Gencabezado_evaluacion> grid = new JqGridData<>(currentPageNumber,limitNumber,sidxNumber,sordSerch,search,totalRows);
+            grid.setInstnaciaClase(new encabezado_evaluacion(), new Gencabezado_evaluacion());
+            ArrayList<campoTabla> campos = this.generarCampsoReporteEncabezadoTabla();
+            
+            for(campoTabla c : campos)
+            {
+                grid.agregarCampo(c.getCampo(),c);
+            }
+            grid.obtenerData();
+            return grid.getJsonString();
+        } catch (Exception ex) {
+            Logger.getLogger(EvaluacionCtr.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return null;
+    }
 
-
+    public static void main(String[] args) {
+//        new EvaluacionCtr().prueba(Gencabezado_evaluacion);
+    }
 }
