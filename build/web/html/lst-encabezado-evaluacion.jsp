@@ -169,4 +169,8 @@
     .ui-jqgrid .ui-userdata div {
         margin: .1em .5em .2em;
     }
+    
+    #pagingDiv_left table tbody .ui-pg-button .ui-pg-div .ui-icon-search{
+	display: none;
+    }
 </style>
