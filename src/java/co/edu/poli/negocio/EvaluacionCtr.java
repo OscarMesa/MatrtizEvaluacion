@@ -262,19 +262,17 @@ public class EvaluacionCtr {
         }
         return 0;
     }
-    
-    public ArrayList<campoTabla> generarCampsoReporteEncabezadoTabla() throws Exception 
-    {
-   
+
+    public ArrayList<campoTabla> generarCampsoReporteEncabezadoTabla() throws Exception {
+
         ArrayList campos = new ArrayList<campoTabla>();
         tablaForanea<encabezado_evaluacion> campoForaneo;
         campoTabla campo = new campoTabla("id_encabezado", "id_encabezado", true, false);
         campos.add(campo);
-        
+
         campo = new campoTabla("descripcion", "descripcion_encab", true, false);
         campos.add(campo);
-        
-        
+
         campo = new campoTabla("id_modulo", "id_modulo", false, true);
         campoForaneo = new tablaForanea();
         campoForaneo.setTabla("modulos");
@@ -283,7 +281,7 @@ public class EvaluacionCtr {
         campoForaneo.agregarCampoForaneo("Codigo", "modulo");
         campo.setForaneo(campoForaneo);
         campos.add(campo);
-        
+
         campo = new campoTabla("id_evidencia", "id_evidencia", false, true);
         campoForaneo = new tablaForanea();
         campoForaneo.setTabla("evidencia");
@@ -292,7 +290,7 @@ public class EvaluacionCtr {
         campoForaneo.agregarCampoForaneo("descripcion", "evidencia");
         campo.setForaneo(campoForaneo);
         campos.add(campo);
-        
+
         campo = new campoTabla("id_elemento", "id_elemento", false, true);
         campoForaneo = new tablaForanea();
         campoForaneo.setTabla("elementos");
@@ -301,7 +299,7 @@ public class EvaluacionCtr {
         campoForaneo.agregarCampoForaneo("descripcion", "elemento");
         campo.setForaneo(campoForaneo);
         campos.add(campo);
-        
+
         campo = new campoTabla("id_norma", "id_norma", false, true);
         campoForaneo = new tablaForanea();
         campoForaneo.setTabla("norma");
@@ -310,7 +308,7 @@ public class EvaluacionCtr {
         campoForaneo.agregarCampoForaneo("codigo_norma", "norma");
         campo.setForaneo(campoForaneo);
         campos.add(campo);
-        
+
         campo = new campoTabla("id_resultado", "id_resultado", false, true);
         campoForaneo = new tablaForanea();
         campoForaneo.setTabla("resultado_aprendizaje");
@@ -319,29 +317,24 @@ public class EvaluacionCtr {
         campoForaneo.agregarCampoForaneo("codigo_resultado", "resultado");
         campo.setForaneo(campoForaneo);
         campos.add(campo);
-        
-        
-        
-        
+
         return campos;
     }
-    
-    public String getEncabezadosEvaluacion(int currentPageNumber, int limitNumber, int sidxNumber, String sordSerch, boolean search, int totalRows) {
+
+    public String getEncabezadosEvaluacion(int currentPageNumber, int limitNumber, String sidx, String sordSerch, boolean search, int totalRows, String filter) {
         try {
-            JqGridData<encabezado_evaluacion, Gencabezado_evaluacion> grid = new JqGridData<>(currentPageNumber,limitNumber,sidxNumber,sordSerch,search,totalRows);
+            JqGridData<encabezado_evaluacion, Gencabezado_evaluacion> grid = new JqGridData<>(currentPageNumber, limitNumber, sidx, sordSerch, search, totalRows, filter);
             grid.setInstnaciaClase(new encabezado_evaluacion(), new Gencabezado_evaluacion());
             ArrayList<campoTabla> campos = this.generarCampsoReporteEncabezadoTabla();
-            
-            for(campoTabla c : campos)
-            {
-                grid.agregarCampo(c.getCampo(),c);
+            for (campoTabla c : campos) {
+                grid.agregarCampo(c.getCampo(), c);
             }
             grid.obtenerData();
             return grid.getJsonString();
         } catch (Exception ex) {
             Logger.getLogger(EvaluacionCtr.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return null;
+        return null;
     }
 
     public static void main(String[] args) {

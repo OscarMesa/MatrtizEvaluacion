@@ -7,6 +7,10 @@ package co.edu.poli.util.jqgrid;
 
 import co.edu.poli.util.Conexion;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +33,7 @@ public class JqGridData<E, T> {
     /**
      * Numero de la pagina en la que se encuentra
      */
-    private int page;
+    private double page;
     /**
      * Cantidad de registros a mostrar
      */
@@ -37,7 +41,7 @@ public class JqGridData<E, T> {
     /**
      * get index row - i.e. user click to sort
      */
-    private int sidx;
+    private String sidx;
     /**
      * get index row - i.e. user click to sort
      */
@@ -70,7 +74,7 @@ public class JqGridData<E, T> {
      * cantidad de resgistros a buscar
      */
     private int totalRows;
-    
+
     /**
      * Variable para obtener la conexión.
      */
@@ -80,22 +84,67 @@ public class JqGridData<E, T> {
      */
     private List<T> rows;
     /**
+     * Mapa con las operaciones de busqueda que puede retornar la Jqgrid
+     */
+    private HashMap<String, String> searchOperation;
+    /**
+     * Mapa que almacena la la busqueda de la grid
+     */
+    private HashMap filtersArr;
+    /**
+     * condicional de la aplicacion
+     */
+    private String where;
+    /**
+     * Cantaidad de registros que tree la busqueda.
+     */
+    private int count;
+    /**
+     *
+     */
+    private double total_pages;
+    /**
      * 
+     */
+    private int start;
+    /**
+     *
      * @param page
      * @param limit
      * @param sidx
      * @param sord
      * @param _search
-     * @throws Exception 
+     * @throws Exception
      */
-    public JqGridData(int page, int limit, int sidx, String sord, boolean _search,int totalRows) {
+    public JqGridData(double page, int limit, String sidx, String sord, boolean _search, int totalRows, String filter) {
         this.totalRows = totalRows;
         this.page = page;
         this.limit = limit;
-        this.sidx = sidx != 0 ? sidx : 1;
+        this.sidx = sidx;
         this.sord = sord;
+        this.filters = filter;
+        this.where = "";
+        this.count = 0;
+        this.total_pages = 0;
+        this.start = 0;
         campos = new HashMap<>();
         cnn = Conexion.getConexion();
+        searchOperation = new HashMap<>();
+        searchOperation.put("eq", "%s=\"%s\"");
+        searchOperation.put("ne", "%s<>\"%s\"");
+        searchOperation.put("bw", "%s LIKE LOWER(\"%s%%\")");
+        searchOperation.put("bn", "%s NOT LIKE LOWER(\"%s%%\")");
+        searchOperation.put("ew", "%s LIKE LOWER(\"%%%s\")");
+        searchOperation.put("en", "%s NOT LIKE LOWER(\"%%%s\")");
+        searchOperation.put("cn", "%s LIKE LOWER(\"%%%s%%\")");
+        searchOperation.put("nc", "%s NOT LIKE LOWER(\"%%%s%%\")");
+        searchOperation.put("nu", "%s IS NULL");
+        searchOperation.put("nn", "%s IS NOT NULL");
+        searchOperation.put("in", "%s IN(%s)");
+        searchOperation.put("ni", "%s NOT IN(%s)");
+        if (this.filters != null) {
+            getJsonObject(this.filters);
+        }
     }
 
     public void agregarCampo(String campo, campoTabla tabla) throws Exception {
@@ -128,7 +177,7 @@ public class JqGridData<E, T> {
         rows = data;
     }
 
-    public String generarSelect() {
+    public String generarSelect() throws SQLException {
         String join = "";
         this.sql = "SELECT ";
         this.sqlCount = "SELECT COUNT(*) AS count";
@@ -148,14 +197,66 @@ public class JqGridData<E, T> {
                 }
             }
         }
+        if (filtersArr != null) {
+            Iterator it = filtersArr.entrySet().iterator();
+            for (filter d : (ArrayList<filter>) filtersArr.get("rules")) {
+                for (Field w : gMyInstance.getClass().getDeclaredFields()) {
+                    if (w.getName().equals(d.getField())) {
+                        w.setAccessible(true);
+                        Column col;
+                        if ((col = w.getAnnotation(Column.class)) != null) {
+                            this.where += String.format(searchOperation.get(d.getOp()), col.tabla() + "." + col.columna(), d.getData()).toString() + " OR ";
+                        }
+                        break;
+                    }
+                }
+            }
+            StringBuilder y = new StringBuilder(this.where);
+            where = y.delete(this.where.length() - 4, this.where.length()).toString();
+            System.out.println(this.where);
+        }
         StringBuilder y = new StringBuilder(this.sql);
         this.sql = y.replace(this.sql.length() - 1, this.sql.length(), "").toString();
         this.sql += " \nFROM " + this.tabla + "\n" + join;
         this.sqlCount += " \nFROM " + this.tabla + "\n" + join;
+        if (!this.where.equals("")) {
+            this.sql += " WHERE " + this.where;
+            this.sqlCount += " WHERE " + this.where;
+        }
+        if (!this.sidx.equals("")) {
+            this.sql += " ORDER BY " + this.sidx + " " + this.sord;
+//            this.sqlCount += " ORDER BY " + this.sidx + " " + this.sord;
+        }
+        this.generarCountSql();
+
+        if (this.count > 0) {
+            total_pages = (double)Math.ceil((double)this.count / this.limit);
+        } else {
+            total_pages = 0;
+        }
+        if (this.page > this.total_pages) {
+            this.page = this.total_pages;
+        }
+        this.start = (int)(this.total_pages == 0 ? 0 : (this.limit * this.page - this.limit));
+        
+        this.sql += " LIMIT " + String.valueOf(this.start) + ","+String.valueOf(this.limit);
+        System.out.println("hello");
         return "";
     }
 
-    public int getPage() {
+    /**
+     * @author Vanessa Agudelo con esete metodo podemos determinar cuantos
+     * registros traee la consulta
+     */
+    public void generarCountSql() throws SQLException {
+        PreparedStatement st = cnn.prepareStatement(this.sqlCount);
+        ResultSet r = st.executeQuery();
+        while (r.next()) {
+            this.count = r.getInt("count");
+        }
+    }
+
+    public double getPage() {
         return page;
     }
 
@@ -167,7 +268,7 @@ public class JqGridData<E, T> {
         return limit;
     }
 
-    public int getSidx() {
+    public String getSidx() {
         return sidx;
     }
 
@@ -246,14 +347,71 @@ public class JqGridData<E, T> {
     public void setCnn(Connection cnn) {
         this.cnn = cnn;
     }
-    
+
     public String getJsonString() {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("page", page);
-        map.put("total", totalRows);
+        map.put("total", this.total_pages);
+        map.put("records", this.count);
         map.put("rows", rows);
         Gson gson = new Gson();
         String resultData = gson.toJson(map);
         return resultData;
     }
+
+    public void getJsonObject(String j) {
+
+        /*String j = "{groupOp:OR,rules:[{field:id_encabezado,op:cn,data:prueba},"
+         + "{field:modulo,op:cn,data:prueba},"
+         + "{field:norma,op:cn,data:prueba},"
+         + "{field:resultado,op:cn,data:prueba},"
+         + "{field:evidencia,op:cn,data:prueba},"
+         + "{field:elemento,op:cn,data:prueba},"
+         + "{field:descripcion_encab,op:cn,data:prueba98}]}";*/
+        filtersArr = new HashMap();
+        Gson gson = new Gson();
+        JsonElement jelement = new JsonParser().parse(j);
+        JsonObject jobject = jelement.getAsJsonObject();
+        filtersArr.put("groupOp", jobject.get("groupOp"));
+        JsonArray array = jobject.getAsJsonArray("rules");
+        ArrayList<filter> f = new ArrayList<>();
+
+        for (int i = 0; i < array.size(); i++) {
+            {
+                JsonObject cont = array.get(i).getAsJsonObject();
+                f.add(new filter(cont.get("field").getAsString(), cont.get("op").getAsString(), cont.get("data").getAsString()));
+            }
+        }
+        filtersArr.put("rules", f);
+//        System.out.println(System.out.printf(searchOperation.get("cn").toString(),"oscar","mesa").toString());
+    }
+
+    public String getSqlCount() {
+        return sqlCount;
+    }
+
+    public void setSqlCount(String sqlCount) {
+        this.sqlCount = sqlCount;
+    }
+
+    public HashMap<String, String> getSearchOperation() {
+        return searchOperation;
+    }
+
+    public void setSearchOperation(HashMap<String, String> searchOperation) {
+        this.searchOperation = searchOperation;
+    }
+
+    public HashMap getFiltersArr() {
+        return filtersArr;
+    }
+
+    public void setFiltersArr(HashMap filtersArr) {
+        this.filtersArr = filtersArr;
+    }
+
+    public static void main(String[] args) {
+//        new JqGridData(0,0, "", "", false, 20).getJsonObject();
+    }
+
 }

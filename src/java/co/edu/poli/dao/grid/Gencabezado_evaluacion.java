@@ -5,17 +5,26 @@
  */
 package co.edu.poli.dao.grid;
 
+import co.edu.poli.util.jqgrid.Column;
+
 /**
  *
  * @author omesagar
  */
 public class Gencabezado_evaluacion {
+    @Column(columna = "id_encabezado",tabla = "encabezado_evaluacion")
     private Object id_encabezado;
+    @Column(columna = "Codigo",tabla = "modulos")
     private Object modulo;
+    @Column(columna = "codigo_norma",tabla = "norma")
     private Object norma;
+    @Column(columna = "codigo_resultado",tabla = "resultado_aprendizaje")
     private Object resultado;
+    @Column(columna = "descripcion",tabla = "evidencia")
     private Object evidencia;
+    @Column(columna = "codigo_elemento",tabla = "elementos")
     private Object elemento;
+    @Column(columna = "descripcion",tabla = "encabezado_evaluacion")
     private Object descripcion_encab;
 
     public Gencabezado_evaluacion(String id_encabezado, String modulo, String norma, String resultado, String evidencia, String elemento, String descripcion_encab) {

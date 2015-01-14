@@ -147,11 +147,12 @@ public class SvrEvaluacion extends HttpServlet {
             } else if (action.equals("list-encabezado")) {
                 int totalRows = Integer.parseInt(String.valueOf(request.getParameter("rows")));
                 int currentPageNumber = Integer.parseInt(String.valueOf(request.getParameter("page")));;
-                int limitNumber = request.getParameter("limit") != null ? Integer.parseInt(request.getParameter("limit")) : 0;
-                int sidxNumber = request.getParameter("sidx") != null && !request.getParameter("sidx").equals("") ? Integer.parseInt(request.getParameter("sidx")) : 0;
+                int limitNumber = request.getParameter("rows") != null ? Integer.parseInt(request.getParameter("rows")) : 0;
+                String sidx = request.getParameter("sidx") != null && !request.getParameter("sidx").equals("") ? (request.getParameter("sidx")) : "";
                 String sordSerch = request.getParameter("sord") != null ? String.valueOf(request.getParameter("sord")) : "";
                 boolean search = request.getParameter("_search") != null ? Boolean.parseBoolean(request.getParameter("_search")) : false;
-                String res = evaluacion_controlador.getEncabezadosEvaluacion(currentPageNumber, limitNumber, sidxNumber, sordSerch, search, totalRows);
+                String filter = request.getParameter("filters") != null && !request.getParameter("filters").equals("") ? request.getParameter("filters") : null;
+                String res = evaluacion_controlador.getEncabezadosEvaluacion(currentPageNumber, limitNumber, sidx, sordSerch, search, totalRows,filter);
                 response.getWriter().write(res);
             }
         }
