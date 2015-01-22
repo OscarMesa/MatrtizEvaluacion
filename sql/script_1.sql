@@ -14,12 +14,12 @@ Date: 2015-01-21 22:17:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
+   
 -- ----------------------------
 -- Table structure for `criterio_evaluacion`
 -- ----------------------------
-DROP TABLE IF EXISTS `criterio_evaluacion`;
-CREATE TABLE `criterio_evaluacion` (
+DROP TABLE IF EXISTS `criterio_evaluacion`;  
+CREATE TABLE `criterio_evaluacion` ( 
 `id_criterio_evaluacion`  int(11) NOT NULL AUTO_INCREMENT ,
 `descripcion`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 PRIMARY KEY (`id_criterio_evaluacion`)
