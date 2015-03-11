@@ -21,57 +21,86 @@
             <%@include file="banner_menu.jsp" %>
         </header>
         <div style="margin-left: 15%; margin-bottom:4%; background-color: #ffffff; margin-right: 15%; padding: 2%">
+            <p class="titulo2">Encabezado de Evaluación</p>
 
             <div style="margin-left: 5%" class="table-responsive">
                 <form action="<c:url value="/SvrEvaluacion"/>" method="POST" id="frm-encabezado-evaluacion">
                     <table border="0" class="table-condensed" cellspacing="0" cellpadding="2" width="85%">
                         <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Descripcion</td>
+                            <td style="vertical-align:text-top; width:350px;" class="titulo" >Descripción de la Evaluación</td>
                             <td class="contenido">
-                                <input type="text" id="txtDescripcion" style="width:650px;margin-bottom: 5px" class="input-xlarge" name="descripcion" />
+                                <input type="text" id="txtDescripcion" style="width:550px;margin-bottom: 5px; " class="input-xlarge" name="descripcion" />
                             </td>
                         </tr>
                         <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Módulo</td>
+                            <td style="vertical-align:text-top; width:360px;" class="titulo">Módulo</td>
                             <td class="contenido">
-                                <input type="text" id="cmbModulo" style="width:650px;margin-bottom: 5px" class="input-xlarge" name="cmbModulo"/>
+                                <input type="text" id="cmbModulo" style="width:550px;margin-bottom: 5px" class="input-xlarge" name="cmbModulo"/>
                                 <label id="cmbModulo-error" class="error" for="cmbModulo"></label>
                             </td>
                         </tr>
                         <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Norma de Competencia</td>
+                            <td style="vertical-align:text-top; width:360px;" class="titulo">Normas de Competencia</td>
                             <td class="contenido">
-                                <input type="hidden" id="cmbNorma" style="width:650px;margin-bottom: 5px" class="input-xlarge"  name="cmbNorma"/>
+                                <input type="hidden" id="cmbNorma" style="width:550px;margin-bottom: 5px" class="input-xlarge"  name="cmbNorma"/>
                                 <label id="cmbNorma-error" class="error" for="cmbNorma"></label>
                             </td>
                         </tr>
                         <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Elemento de Competencia</td>
+                            <td style="vertical-align:text-top; width:360px;" class="titulo">Elementos de Competencia</td>
                             <td class="contenido">
-                                <input type="hidden" id="cmbElemento" style="width:650px;margin-bottom: 5px" class="input-xlarge" name="cmbElemento"/>
+                                <input type="hidden" id="cmbElemento" style="width:550px;margin-bottom: 5px" class="input-xlarge" name="cmbElemento"/>
                                 <label id="cmbElemento-error" class="error" for="cmbElemento"></label>
                             </td>
                         </tr>
                         <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Resultado de aprendizaje</td>
+                            <td style="vertical-align:text-top; width:60px;" class="titulo">Resultados de Aprendizaje</td>
                             <td class="contenido">
-                                <input type="hidden" id="cmbResultado" style="width:650px;margin-bottom: 5px" class="input-xlarge" name="cmbResultado"/>
+                                <input type="hidden" id="cmbResultado" style="width:550px;margin-bottom: 5px" class="input-xlarge" name="cmbResultado"/>
                                 <label id="cmbResultado-error" class="error" for="cmbResultado"></label>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Evidencia</td>
-                            <td class="contenido">
-                                <input type="hidden" id="cmbEvidencia" style="width:650px;margin-bottom: 5px" class="input-xlarge" name="cmbEvidencia"/>
-                                <label id="cmbEvidencia-error" class="error" for="cmbEvidencia"></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-
-                            </td>
-                        </tr>
+                        
+                       
                     </table>
+                    
+                    
+                    
+                     <table style="margin-left:10%; width: 76%; margin-top: 2%" border="0" class="table-condensed" cellspacing="0" cellpadding="0">
+                         
+                          <tr>
+                              <td class="titulo" colspan="6" style="text-align: center; margin-bottom: 30px; margin-top: 30px;">Porcentajes de Evidencias</td>
+                    </tr>
+                    
+                    <tr >
+                        <td style="width: 2%" class="titulo"><span class="campoObligatorio">*</span></td>
+                        <td style="width: 38%" class="titulo">Conocimiento</td>
+                        <td style="width: 2%" class="titulo"><span class="campoObligatorio">*</span></td>
+                        <td style="width: 40%" class="titulo">Desempeño</td>
+                        <td style="width: 2%" class="titulo"><span class="campoObligatorio">*</span></td>
+                        <td style="width: 16%" class="titulo">Producto</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="contenido">
+                            <form>
+                                <input style="width: 100px;height: 32px; border-radius: 4px;" autofocus="true" type="text" />
+                            </form>
+                        </td>
+                        <td></td>
+                        <td class="contenido">
+                            <form>
+                                <input style="width: 100px;height: 32px; border-radius: 4px;" autofocus="true" type="text" />
+                            </form>
+                        </td>
+                        <td></td>
+                        <td class="contenido">
+                            <form>
+                                <input style="width: 100px;height: 32px; border-radius: 4px;" autofocus="true" type="text" />
+                            </form>
+                        </td>
+                    </tr>
+                </table>
                 </form>
                 <div id="zona_buttons">
                     <table cellspacing="5" style="width: 70%; margin-top: 20px;">
