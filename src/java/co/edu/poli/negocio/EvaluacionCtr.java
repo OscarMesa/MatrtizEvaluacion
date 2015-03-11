@@ -102,7 +102,7 @@ public class EvaluacionCtr {
         return null;
     }
 
-    public Object obtenerNormas(String modulo, String termino) {
+    public ArrayList<norma> obtenerNormas(String modulo, String termino) {
         try {
             Connection con = Conexion.getConexion();
             PreparedStatement st = con.prepareStatement(EvaluacionSQL.CargarNormasModulo());
@@ -111,7 +111,7 @@ public class EvaluacionCtr {
             st.setString(3, "%" + termino + "%");
             System.out.println(st);
             ResultSet r = st.executeQuery();
-            ArrayList<JsonBean> normas = new ArrayList<>();
+            ArrayList<norma> normas = new ArrayList<>();
             if (r.next()) {
                 do {
                     norma e = new norma();
@@ -119,11 +119,8 @@ public class EvaluacionCtr {
                     e.setDescripcion(r.getString("descripcion"));
                     e.setEstado(r.getInt("estado"));
                     e.setId_norma(r.getInt("id_norma"));
-                    JsonBean j = new JsonBean(r.getString("id_norma"), r.getString("codigo_norma"), e);
-                    normas.add(j);
+                    normas.add(e);
                 } while (r.next());
-            } else {
-                normas.add(new JsonBean("0", "No se encontro norma relacionada", null));
             }
             return normas;
         } catch (SQLException ex) {
@@ -132,7 +129,7 @@ public class EvaluacionCtr {
         return null;
     }
 
-    public Object obtenerElementos(String norma, String termino) {
+    public ArrayList<elementos> obtenerElementos(String norma, String termino) {
         try {
             Connection con = Conexion.getConexion();
             PreparedStatement st = con.prepareStatement(EvaluacionSQL.CargarElementoNormas());
@@ -141,18 +138,15 @@ public class EvaluacionCtr {
             st.setString(3, "%" + termino + "%");
             System.out.println(st);
             ResultSet r = st.executeQuery();
-            ArrayList<JsonBean> normas = new ArrayList<>();
+            ArrayList<elementos> normas = new ArrayList<>();
             if (r.next()) {
                 do {
                     elementos e = new elementos();
                     e.setCodigo_elemento(r.getString("codigo_elemento"));
                     e.setDescripcion(r.getString("descripcion"));
                     e.setId_elemento(r.getInt("id_elemento"));
-                    JsonBean j = new JsonBean(r.getString("id_elemento"), r.getString("codigo_elemento"), e);
-                    normas.add(j);
+                    normas.add(e);
                 } while (r.next());
-            } else {
-                normas.add(new JsonBean("0", "No se encontro elemento relacionada", null));
             }
             return normas;
         } catch (SQLException ex) {
@@ -190,7 +184,7 @@ public class EvaluacionCtr {
         return null;
     }
 
-    public Object obtenerEvidencia(String modulo, String termino) {
+    public ArrayList<evidencia> obtenerEvidencia(String modulo, String termino) {
         try {
             Connection con = Conexion.getConexion();
             PreparedStatement st = con.prepareStatement(EvaluacionSQL.CargarEvidenciaModulo());
@@ -199,7 +193,7 @@ public class EvaluacionCtr {
             st.setString(3, "%" + termino + "%");
             System.out.println(st);
             ResultSet r = st.executeQuery();
-            ArrayList<JsonBean> resultados = new ArrayList<>();
+            ArrayList<evidencia> resultados = new ArrayList<>();
             if (r.next()) {
                 do {
                     evidencia e = new evidencia();
@@ -208,11 +202,8 @@ public class EvaluacionCtr {
                     e.setId_modulo(r.getString("Id_modulo"));
                     e.setId_tipo_evidencia(r.getInt("id_tipo_evidencia"));
                     e.setPorcentaje(r.getInt("porcentaje"));
-                    JsonBean j = new JsonBean(r.getString("id_evidencia"), (r.getString("descripcion") + " | " + r.getString("tpdescripcion") + " | " + r.getString("porcentaje") + "%"), e);
-                    resultados.add(j);
+                    resultados.add(e);
                 } while (r.next());
-            } else {
-                resultados.add(new JsonBean("0", "No se encontro evidencia relacionado", null));
             }
             return resultados;
         } catch (SQLException ex) {

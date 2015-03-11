@@ -8,7 +8,7 @@
                             <a href="/index.php"><img src="<c:url value="/images/banner_2014Mayo.png" />" alt="Banner" border="0" height="245" width="950"></a>
                         </div>
                     </td>
-                </tr>
+                </tr>   
             </tbody>
         </table>
 
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </li>
-                <li><a href=""><span><img src="<c:url value="/images/top5.png"/>" /> Resultados</span></a>
+                <li><a href="#"><span><img src="<c:url value="/images/top5.png"/>" /> Resultados</span></a>
                     <div class="subs">
                         <div class="col">
                             <ul>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </li>
-                <li><a href="frm_evaluacion.sp"><img src="<c:url value="/images/top4.png"/>" /> Evaluación</a>
+                <li><a href="#"><img src="<c:url value="/images/top4.png"/>" /> Evaluación</a>
                     <div class="subs">
                         <div class="col">
                             <ul>

@@ -5,8 +5,11 @@
  */
 package co.edu.poli.servlet;
 
+import co.edu.poli.dao.elementos;
 import co.edu.poli.dao.encabezado_evaluacion;
+import co.edu.poli.dao.evidencia;
 import co.edu.poli.dao.grid.Gencabezado_evaluacion;
+import co.edu.poli.dao.norma;
 import co.edu.poli.negocio.EvaluacionCtr;
 import co.edu.poli.util.JsonBean;
 import co.edu.poli.util.jqgrid.Data;
@@ -71,9 +74,24 @@ public class SvrEvaluacion extends HttpServlet {
                     if (request.getParameter("term") != null) {
                         termino = request.getParameter("term");
                     }
-                    Gson gson = new Gson();
-                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerNormas(request.getParameter("modulo"), termino));
-                    out.write(jsonModules);
+                    String respuesta = "<table border=1><tr><th>Norma de Competencia</th><th>Elemento de Competencia</th></tr>";
+                    boolean sw = false;
+                    for(norma e: evaluacion_controlador.obtenerNormas(request.getParameter("modulo"), termino))
+                    {
+                        respuesta += "<tr><td><label><input type='checkbox' name='norma["+e.getCodigo_norma()+"]' value='"+e.getCodigo_norma()+"'>"+e.getDescripcion()+"</label></td>";
+                        respuesta += "<td>";
+                        for(elementos t : evaluacion_controlador.obtenerElementos(String.valueOf(e.getId_norma()), "")){
+                            respuesta +="<input type='checkbox' name='evidencia["+e.getCodigo_norma()+"]["+t.getId_elemento()+"]' value='"+t.getDescripcion()+"'>"+t.getDescripcion()+"</label><br/>";
+                        }  
+                        respuesta += "</td>";
+                        respuesta += "</tr>";
+                        sw = true;
+                    }
+                    respuesta += "</table>";
+                    if(!sw)
+                        out.write("0");
+                    else
+                        out.write(respuesta);
                 } else {
                     Gson gson = new Gson();
                     JsonBean j = new JsonBean("0", "Debe seleccionar un modulo.", null);

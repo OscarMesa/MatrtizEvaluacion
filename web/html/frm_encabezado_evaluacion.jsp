@@ -39,17 +39,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Norma de Competencia</td>
+                            <td style="vertical-align:text-top" class="titulo" width="20%"></td>
                             <td class="contenido">
-                                <input type="hidden" id="cmbNorma" style="width:650px;margin-bottom: 5px" class="input-xlarge"  name="cmbNorma"/>
+                                <div id="cmbNorma" style="width:650px;margin-bottom: 5px" class="input-xlarge" >
+                                    
+                                </div>
                                 <label id="cmbNorma-error" class="error" for="cmbNorma"></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Elemento de Competencia</td>
-                            <td class="contenido">
-                                <input type="hidden" id="cmbElemento" style="width:650px;margin-bottom: 5px" class="input-xlarge" name="cmbElemento"/>
-                                <label id="cmbElemento-error" class="error" for="cmbElemento"></label>
                             </td>
                         </tr>
                         <tr>
@@ -131,7 +126,7 @@
     {
         $("#frm-encabezado-evaluacion").trigger("reset");
         $('#cmbModulo').select2('data', null);
-        $('#cmbNorma').select2('data', null);
+//        $('#cmbNorma').select2('data', null);
         $('#cmbResultado').select2('data', null);
         $('#cmbEvidencia').select2('data', null);
         $('#cmbElemento').select2('data', null);
@@ -201,7 +196,6 @@
             quietMillis: 100,
             cache: true,
             data: function (term, page) {
-                $('#cmbNorma').select2('data', null);
                 $('#cmbResultado').select2('data', null);
                 $('#cmbEvidencia').select2('data', null);
                 return {
@@ -222,72 +216,89 @@
                 return callback(data);
 
             });
-        }
+        } 
 
-    });
+    }).on("change",function(e){
+            $.ajax({
+                url: '../SvrEvaluacion',
+                data: {action: 'obtenerNorma',modulo: ($("#cmbModulo").select2("data") != null ? $("#cmbModulo").select2("data").id : "")},
+                success: function(e){
+                    if(e == 0)
+                    {
+                        $("#cmbNorma").html("El módulo "+$("#cmbModulo").select2("data").text+" no presenta ninguna norma asociada.");
+                    }else{
+                        $("#cmbNorma").html(e);
+                    }
+                },
+                error: function(e){
+                    alert(e)
+                }
+            })
+        });
+    
 
-    $('#cmbNorma').select2({
-        placeholder: 'Norma a evaluar',
-        ajax: {
-            url: "../SvrEvaluacion",
-            dataType: 'json',
-            quietMillis: 100,
-            cache: true,
-            data: function (term, page) {
-                $('#cmbElemento').select2('data', null);
-                return {
-                    term: term,
-                    modulo: ($("#cmbModulo").select2("data") != null ? $("#cmbModulo").select2("data").id : ""),
-                    action: 'obtenerNorma', //search term
-                    page_limit: 10 // page size
-                };
-            },
-            results: function (data, page) {
-                $('#cmbNorma-error').css("display","none");
-                return {results: data};
-            }
+//    $('#cmbNorma').select2({
+//        placeholder: 'Norma a evaluar',
+//        ajax: {
+//            url: "../SvrEvaluacion",
+//            dataType: 'json',
+//            quietMillis: 100,
+//            cache: true,
+//            data: function (term, page) {
+//                $('#cmbElemento').select2('data', null);
+//                return {
+//                    term: term,
+//                    modulo: ($("#cmbModulo").select2("data") != null ? $("#cmbModulo").select2("data").id : ""),
+//                    action: 'obtenerNorma', //search term
+//                    page_limit: 10 // page size
+//                };
+//            },
+//            results: function (data, page) {
+//                $('#cmbNorma-error').css("display","none");
+//                return {results: data};
+//            }
+//
+//        },
+//        initSelection: function (element, callback) {
+//            return $.getJSON("../SvrEvaluacion", null, function (data) {
+//
+//                return callback(data);
+//
+//            });
+//        }
+//
+//    });
 
-        },
-        initSelection: function (element, callback) {
-            return $.getJSON("../SvrEvaluacion", null, function (data) {
-
-                return callback(data);
-
-            });
-        }
-
-    });
-
-    $('#cmbElemento').select2({
-        placeholder: 'Elemento a evaluar',
-        ajax: {
-            url: "../SvrEvaluacion",
-            dataType: 'json',
-            quietMillis: 100,
-            cache: true,
-            data: function (term, page) {
-                return {
-                    term: term,
-                    norma: ($("#cmbNorma").select2("data") != null ? $("#cmbNorma").select2("data").id : ""),
-                    action: 'obtenerElemento', //search term
-                    page_limit: 10 // page size
-                };
-            },
-            results: function (data, page) {
-                $('#cmbElemento-error').css("display","none");
-                return {results: data};
-            }
-
-        },
-        initSelection: function (element, callback) {
-            return $.getJSON("../SvrEvaluacion", null, function (data) {
-
-                return callback(data);
-
-            });
-        }
-
-    });
+//    $('#cmbElemento').select2({
+//        placeholder: 'Elemento a evaluar',
+//        ajax: {
+//            url: "../SvrEvaluacion",
+//            dataType: 'json',
+//            quietMillis: 100,
+//            cache: true,
+//            data: function (term, page) {
+//                return {
+//                    term: term,
+//                    norma: ($("#cmbNorma").select2("data") != null ? $("#cmbNorma").select2("data").id : ""),
+//                    action: 'obtenerElemento', //search term
+//                    page_limit: 10 // page size
+//                };
+//            },
+//            results: function (data, page) {
+//                $('#cmbElemento-error').css("display","none");
+//                return {results: data};
+//            }
+//
+//        },
+//        initSelection: function (element, callback) {
+//            return $.getJSON("../SvrEvaluacion", null, function (data) {
+//
+//                return callback(data);
+//
+//            });
+//        }
+//
+//    });
 
     $('#cmbResultado').select2({
         placeholder: 'Resultado esperado.',
