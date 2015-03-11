@@ -12,7 +12,7 @@
 
         <div style="margin-left: 15%; margin-bottom:4%; background-color: #ffffff; margin-right: 15%; padding: 2%">
 
-            <p class="titulo2">Asignación de resultados a modulos</p>
+            <p class="titulo2">Asignación de resultados a módulos</p>
             <div class="table-responsive">
                 <table style="margin-left:10%" border="0" class="table-condensed" cellspacing="0" cellpadding="2" width="100%">
                     <tr>
@@ -37,11 +37,11 @@
 
                     <tr>
                         <td><span class="campoObligatorio">*</span></td>
-                        <td class="titulo" colspan="2">Modulo</td>
+                        <td class="titulo" colspan="2">Módulo</td>
                         <td colspan="5">
 
                             <select class="select" style="width:70%; height: 30px;">
-                                <option value="0">Seleccione el Modulo</option>
+                                <option value="0">Seleccione el Módulo</option>
                                 <option value="20">_____________________________</option>
                                 <option value="1">Desarrollo del Pensamiento AnalÃ­tico y Sistemico 1</option>
                                 <option value="2">Desarrollo del Pensamiento AnalÃ­tico y Sistemico 2</option>
