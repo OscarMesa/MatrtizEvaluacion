@@ -10,6 +10,7 @@ import co.edu.poli.dao.encabezado_evaluacion;
 import co.edu.poli.dao.evidencia;
 import co.edu.poli.dao.grid.Gencabezado_evaluacion;
 import co.edu.poli.dao.norma;
+import co.edu.poli.dao.resultado_aprendizaje;
 import co.edu.poli.negocio.EvaluacionCtr;
 import co.edu.poli.util.JsonBean;
 import co.edu.poli.util.jqgrid.Data;
@@ -124,8 +125,23 @@ public class SvrEvaluacion extends HttpServlet {
                         termino = request.getParameter("term");
                     }
                     Gson gson = new Gson();
-                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerResultados(request.getParameter("modulo"), termino));
-                    out.write(jsonModules);
+                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerResultados(request.getParameter("modulo"), termino));                  
+                    
+                    String respuesta = "<table border=1><tr><th>Resultados de aprendizaje</th></tr>";
+                    boolean sw = false;
+                    for(resultado_aprendizaje e: evaluacion_controlador.obtenerResultados(request.getParameter("modulo"), termino))
+                    {
+                        respuesta += "<tr><td><label><input type='checkbox' name='norma["+e.getCodigo_resultado()+"]' value='"+e.getCodigo_resultado()+"'>"+e.getDescripcion()+"</label></td>";
+                        respuesta += "</tr>";
+                        sw = true;
+                    }
+                    respuesta += "</table>";
+                    if(!sw)
+                        out.write("0");
+                    else
+                        out.write(respuesta);
+                    
+                    
                 } else {
                     Gson gson = new Gson();
                     JsonBean j = new JsonBean("0", "Debe seleccionar un módulo.", null);

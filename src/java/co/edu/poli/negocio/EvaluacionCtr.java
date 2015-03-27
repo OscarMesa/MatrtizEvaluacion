@@ -155,29 +155,26 @@ public class EvaluacionCtr {
         return null;
     }
 
-    public Object obtenerResultados(String modulo, String termino) {
+    public ArrayList<resultado_aprendizaje> obtenerResultados(String modulo, String termino) {
         try {
             Connection con = Conexion.getConexion();
             PreparedStatement st = con.prepareStatement(EvaluacionSQL.CargarResultadoModulo());
             st.setString(1, modulo);
             st.setString(2, "%" + termino + "%");
             st.setString(3, "%" + termino + "%");
-            System.out.println(st);
             ResultSet r = st.executeQuery();
-            ArrayList<JsonBean> resultados = new ArrayList<>();
+            ArrayList<resultado_aprendizaje> resultados = new ArrayList<>();
             if (r.next()) {
                 do {
                     resultado_aprendizaje e = new resultado_aprendizaje();
                     e.setCodigo_resultado(r.getString("codigo_resultado"));
-                    e.setDescripcion(r.getString("descripcion"));
+                    e.setDescripcion(r.getString("descripcion").substring(0, 50) + "...");
                     e.setId_resultado(r.getInt("id_resultado"));
-                    JsonBean j = new JsonBean(r.getString("id_resultado"), (r.getString("codigo_resultado") + " | " + r.getString("descripcion").substring(0, 50) + "..."), e);
-                    resultados.add(j);
+//                    JsonBean j = new JsonBean(r.getString("id_resultado"), (r.getString("codigo_resultado") + " | " + r.getString("descripcion").substring(0, 50) + "..."), e);
+                    resultados.add(e);
                 } while (r.next());
-            } else {
-                resultados.add(new JsonBean("0", "No se encontro resultado de aprendizaje relacionado", null));
+                return resultados;
             }
-            return resultados;
         } catch (SQLException ex) {
             Logger.getLogger(EstadosCtr.class.getName()).log(Level.SEVERE, null, ex);
         }
