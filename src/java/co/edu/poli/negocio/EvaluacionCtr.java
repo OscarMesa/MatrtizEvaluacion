@@ -168,7 +168,7 @@ public class EvaluacionCtr {
                 do {
                     resultado_aprendizaje e = new resultado_aprendizaje();
                     e.setCodigo_resultado(r.getString("codigo_resultado"));
-                    e.setDescripcion(r.getString("descripcion").substring(0, 50) + "...");
+                    e.setDescripcion(r.getString("descripcion"));
                     e.setId_resultado(r.getInt("id_resultado"));
 //                    JsonBean j = new JsonBean(r.getString("id_resultado"), (r.getString("codigo_resultado") + " | " + r.getString("descripcion").substring(0, 50) + "..."), e);
                     resultados.add(e);

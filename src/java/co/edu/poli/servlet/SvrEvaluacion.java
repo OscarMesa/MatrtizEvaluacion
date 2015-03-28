@@ -13,20 +13,12 @@ import co.edu.poli.dao.norma;
 import co.edu.poli.dao.resultado_aprendizaje;
 import co.edu.poli.negocio.EvaluacionCtr;
 import co.edu.poli.util.JsonBean;
-import co.edu.poli.util.jqgrid.Data;
-import co.edu.poli.util.jqgrid.JqGridData;
-import co.edu.poli.util.jqgrid.Person;
-import co.edu.poli.util.rules;
-import co.edu.poli.util.searchOperation;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -129,9 +121,11 @@ public class SvrEvaluacion extends HttpServlet {
                     
                     String respuesta = "<table border=1><tr><th>Resultados de aprendizaje</th></tr>";
                     boolean sw = false;
-                    for(resultado_aprendizaje e: evaluacion_controlador.obtenerResultados(request.getParameter("modulo"), termino))
+                    ArrayList<resultado_aprendizaje> r = evaluacion_controlador.obtenerResultados(request.getParameter("modulo"), termino);
+                    if(r!=null){
+                    for(resultado_aprendizaje e: r)
                     {
-                        respuesta += "<tr><td><label><input type='checkbox' name='norma["+e.getCodigo_resultado()+"]' value='"+e.getCodigo_resultado()+"'>"+e.getDescripcion()+"</label></td>";
+                        respuesta += "<tr><td><input type='checkbox' name='norma["+e.getCodigo_resultado()+"]' value='"+e.getCodigo_resultado()+"'>"+e.getDescripcion()+"</td>";
                         respuesta += "</tr>";
                         sw = true;
                     }
@@ -140,7 +134,9 @@ public class SvrEvaluacion extends HttpServlet {
                         out.write("0");
                     else
                         out.write(respuesta);
-                    
+                    }else{
+                        out.write("0");
+                    }
                     
                 } else {
                     Gson gson = new Gson();

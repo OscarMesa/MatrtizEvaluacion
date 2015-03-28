@@ -260,14 +260,9 @@
                 } else {
                     $("#cmbNorma").html(e);
                 }
-            },
-            error: function (e) {
-                alert(e)
-            }
-        });
-        
-        
-        $.ajax({
+                
+                
+                $.ajax({
             url: '../SvrEvaluacion',
             data: {action: 'obtenerResultado', modulo: ($("#cmbModulo").select2("data") != null ? $("#cmbModulo").select2("data").id : "")},
             success: function (e) {
@@ -279,9 +274,20 @@
                 }
             },
             error: function (e) {
+                console.log(e)
+            }
+        });
+                
+                
+                
+            },
+            error: function (e) {
                 alert(e)
             }
         });
+        
+        
+        
         
     });
 
