@@ -6,8 +6,18 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>Ítems de Evaluación</title>
         <%@include file="archivos_head.jsp" %>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script>
+            $(function () {
+                $("#tabs").tabs();
+            });
+        </script>
     </head>
     <body>
         <header>
@@ -18,26 +28,16 @@
             <div style="margin-left: 20%" class="table-responsive">
                 <table border="0" class="table-condensed" cellspacing="0" cellpadding="2" width="100%">
                     <tr>
-                        <td class="titulo" colspan="2" width="20%">Institución</td>
-                        <td class="contenido" colspan="5">
-                            <form>
-                                <input style="width: 70%; height: 30px;" type="text" value="Institución Educativa Marco Fidel Suarez" disabled/>
-                            </form></td>
-                    </tr>
-                    <tr>
-                        <td class="titulo" colspan="2">Docente</td>
-                        <td class="contenido" colspan="5"><form><input style="width: 70%; height: 30px;" type="text" value="Jhon Jairo Monsalve" disabled></form></td>
-                    </tr>
-                    <tr>
-                        <td class="titulo" colspan="2">Modulo</td>
+                        <td class="titulo" colspan="2">Módulo</td>
                         <td colspan="5"><select class="select" style="width:70%; height: 30px;">
-                                <option value="0">Seleccione el Modulo</option>
+                                <option value="0">Seleccione el Módulo</option>
                                 <option value="1">Desarrollo del Pensamiento Analítico y Sistemico 1</option>
                                 <option value="2">Desarrollo del Pensamiento Analítico y Sistemico 2</option>
                             </select></td>
                     </tr>
                 </table>
             </div>
+            
 
             <div style="margin-top: 30px;">
                 <table border="1" style="width: 98%; border-top-color: #006600 5px;"> 
@@ -189,7 +189,7 @@
                     </tr>
                 </table>
             </div>
-            
+
             <div id="zona_buttons">
                 <table cellspacing="5" style="width: 70%; margin-top: 20px;">
                     <tr>
