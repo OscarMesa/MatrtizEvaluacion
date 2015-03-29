@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/PPI/MatrizEvaluacion/web/html/lst-encabezado-evaluacion.jsp</file>
             <file>file:/C:/PPI/MatrizEvaluacion/web/html/frm_resultados_aprendizaje.jsp</file>
             <file>file:/C:/PPI/MatrizEvaluacion/web/html/frm_encabezado_evaluacion.jsp</file>
             <file>file:/C:/PPI/MatrizEvaluacion/src/java/co/edu/poli/dao/encabezado_evaluacion.java</file>
             <file>file:/C:/PPI/MatrizEvaluacion/src/java/co/edu/poli/servlet/SvrEvaluacion.java</file>
+=======
+            <file>file:/C:/PPI/MatrtizEvaluacion/web/html/frm_encabezado_evaluacion.jsp</file>
+>>>>>>> ca38617e80f4cb7e5bf8cc7fe434a7cbc2a91311
         </group>
     </open-files>
 </project-private>

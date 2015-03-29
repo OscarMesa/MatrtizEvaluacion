@@ -6,7 +6,7 @@ package co.edu.poli.util;
 
 /**
  *
- * @author Oskar
+ * @author Vanessa
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,7 +27,7 @@ public class SQL {
         try{
             String url = "jdbc:mysql://localhost/sistema_competencias";
             String user = "root";
-            String password = "root";
+            String password = "";
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url,user,password);
         }catch(Exception e){e.printStackTrace();}

@@ -26,8 +26,10 @@
         </header>
         <div style="margin-left: 15%; margin-bottom:4%; background-color: #ffffff; margin-right: 15%; padding: 2%">
 
-            <div style="margin-left: 5%" class="table-responsive">
+            <div style="margin-left: 5%; margin-top: 10%" class="table-responsive">
                 <form action="<c:url value="/SvrEvaluacion"/>" method="POST" id="frm-encabezado-evaluacion">
+                   
+                    
                     <table border="0" class="table-condensed" cellspacing="0" cellpadding="2" width="85%">
                         <tr>
                             <td style="vertical-align:text-top" class="titulo" width="20%">Descripcion</td>
@@ -61,7 +63,7 @@
                             </td>
                         </tr>
                         <tr>
-                        <table style="margin-left:10%; width: 76%; margin-top: 2%" border="0" class="table-condensed" cellspacing="0" cellpadding="0">
+                        <table style="margin-left:10%; width: 76%;" border="0" class="table-condensed" cellspacing="0" cellpadding="0">
 
                             <tr>
                                 <td class="titulo" colspan="6" style="text-align: center; margin-bottom: 30px; margin-top: 30px;">Porcentajes de Evidencias</td>
@@ -353,3 +355,87 @@
 
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
