@@ -120,26 +120,6 @@
                                     %></textarea>
                             </td>
                         </tr>
-                        <tr>
-                             <td><span class="campoObligatorio">*</span></td>
-                            <td class="titulo" colspan="2">
-                                Estado
-                            </td>
-                            <td class="contenido" colspan="5">
-                                <select name="estado" style="width: 70%"><%
-                                    out.write("<option value=''>Seleccione</option>");
-                                    EstadosCtr estadoCtr = new EstadosCtr();
-                                    
-                                    for(estado e : estadoCtr.obtenerEstados())
-                                    {
-                                        out.write("<option value='" + e.getCodigo() + "'"+ (request.getAttribute("norma_actualizar") != null && n.getEstado().getValor_estado() == e.getCodigo()?"selected='selected'":"") + " >" + e.getDescripcion() + "</option>");
-                                    }
-                                  
-                                    %>
-                                </select>
-                            </td>
-                        </tr>
-
                     </table>
                 </div>
 
@@ -148,7 +128,7 @@
                         <tr>
                             <td><a href=""><button style="width: 115px;" type="submit" class="btn btn-success " value="<% out.write((request.getAttribute("norma_actualizar") == null ? "guardar" : "actualizar"));%>" name="guardar">Guardar</button></a></td>
                             <td><a href=""><button style="width: 115px;" type="submit" class="btn btn-success" value="consultar" name="consultar" id="consultar">Consultar</button></a></td>
-                            <td><a href=""><button id="eliminar" style="width: 115px;" type="submit" class="btn btn-success" value="desactivar" name="desactivar">Desactivar</button> </a></td>
+                            <td><a href=""><button id="eliminar" style="width: 115px;" type="submit" class="btn btn-success" value="desactivar" name="desactivar">Eliminar</button> </a></td>
                             <td><a href=""><button style="width: 115px;" type="submit" class="btn btn-success" value="listar" name="listar" onclick="noValidar()">Listar</button></a></td>
                         </tr>
                         <tr>                            

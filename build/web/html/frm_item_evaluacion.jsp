@@ -196,8 +196,8 @@
 
                         <td><a href=""><button style="width: 115px;" type="button" class="btn btn-success">Guardar</button></a></td>
                         <td><button style="width: 115px;" type="button" class="btn btn-success">Consultar</button></td>
-                        <td><a href=""><button style="width: 115px;" type="button" class="btn btn-success">Modificar</button></a></td>
-                        <td><a href=""><button style="width: 115px;" type="button" class="btn btn-success">Cancelar</button></a></td>
+                        <td><a href=""><button style="width: 115px;" type="button" class="btn btn-success">Eliminar</button></a></td>
+                        <td><a href=""><button style="width: 115px;" type="button" class="btn btn-success">Listar</button></a></td>
 
                     </tr>
                 </table>
