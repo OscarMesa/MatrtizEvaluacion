@@ -19,6 +19,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import javax.json.JsonArray;
+import javax.json.JsonValue;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -69,22 +73,24 @@ public class SvrEvaluacion extends HttpServlet {
                     }
                     String respuesta = "<table border=1><tr><th>Norma de Competencia</th><th>Elemento de Competencia</th></tr>";
                     boolean sw = false;
-                    for(norma e: evaluacion_controlador.obtenerNormas(request.getParameter("modulo"), termino))
-                    {
-                        respuesta += "<tr><td><label><input type='checkbox' name='norma["+e.getCodigo_norma()+"]' value='"+e.getCodigo_norma()+"'>"+e.getDescripcion()+"</label></td>";
+                    int i = 0;
+                    for (norma e : evaluacion_controlador.obtenerNormas(request.getParameter("modulo"), termino)) {
+                        respuesta += "<tr><td><label><input class='w_normas' type='checkbox' name='norma[" + request.getParameter("modulo") + "][" + (i++) + "]' value='" + e.getCodigo_norma() + "'>" + e.getDescripcion() + "</label></td>";
                         respuesta += "<td>";
-                        for(elementos t : evaluacion_controlador.obtenerElementos(String.valueOf(e.getId_norma()), "")){
-                            respuesta +="<input type='checkbox' name='evidencia["+e.getCodigo_norma()+"]["+t.getId_elemento()+"]' value='"+t.getDescripcion()+"'>"+t.getDescripcion()+"</label><br/>";
-                        }  
+                        int k = 0;
+                        for (elementos t : evaluacion_controlador.obtenerElementos(String.valueOf(e.getId_norma()), "")) {
+                            respuesta += "<input type='checkbox' name='elemento[" + e.getCodigo_norma() + "][" + (k++) + "]' value='" + t.getCodigo_elemento() + "'>" + t.getDescripcion() + "</label><br/>";
+                        }
                         respuesta += "</td>";
                         respuesta += "</tr>";
                         sw = true;
                     }
                     respuesta += "</table>";
-                    if(!sw)
+                    if (!sw) {
                         out.write("0");
-                    else
+                    } else {
                         out.write(respuesta);
+                    }
                 } else {
                     Gson gson = new Gson();
                     JsonBean j = new JsonBean("0", "Debe seleccionar un modulo.", null);
@@ -117,27 +123,28 @@ public class SvrEvaluacion extends HttpServlet {
                         termino = request.getParameter("term");
                     }
                     Gson gson = new Gson();
-                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerResultados(request.getParameter("modulo"), termino));                  
-                    
+                    String jsonModules = gson.toJson(evaluacion_controlador.obtenerResultados(request.getParameter("modulo"), termino));
+
                     String respuesta = "<table border=1><tr><th>Resultados de aprendizaje</th></tr>";
                     boolean sw = false;
+                    int i = 1;
                     ArrayList<resultado_aprendizaje> r = evaluacion_controlador.obtenerResultados(request.getParameter("modulo"), termino);
-                    if(r!=null){
-                    for(resultado_aprendizaje e: r)
-                    {
-                        respuesta += "<tr><td><input type='checkbox' name='norma["+e.getCodigo_resultado()+"]' value='"+e.getCodigo_resultado()+"'>"+e.getDescripcion()+"</td>";
-                        respuesta += "</tr>";
-                        sw = true;
-                    }
-                    respuesta += "</table>";
-                    if(!sw)
+                    if (r != null) {
+                        for (resultado_aprendizaje e : r) {
+                            respuesta += "<tr><td><input type='checkbox' class='w_resultaddos' name='resultado[" + request.getParameter("modulo") + "][" + (i++) + "]' value='" + e.getCodigo_resultado() + "'>" + e.getDescripcion() + "</td>";
+                            respuesta += "</tr>";
+                            sw = true;
+                        }
+                        respuesta += "</table>";
+                        if (!sw) {
+                            out.write("0");
+                        } else {
+                            out.write(respuesta);
+                        }
+                    } else {
                         out.write("0");
-                    else
-                        out.write(respuesta);
-                    }else{
-                        out.write("0");
                     }
-                    
+
                 } else {
                     Gson gson = new Gson();
                     JsonBean j = new JsonBean("0", "Debe seleccionar un módulo.", null);
@@ -164,16 +171,31 @@ public class SvrEvaluacion extends HttpServlet {
                     out.write(jsonModules);
                 }
             } else if (action.equals("guardarEncabezadoEvaluacion")) {
+                ArrayList<String> resultados = new ArrayList<>();
                 encabezado_evaluacion encabezado = new encabezado_evaluacion();
-                encabezado.setDescripcion(request.getParameter("descripcion"));
-                encabezado.setId_elemento(Integer.parseInt(request.getParameter("cmbElemento")));
-                encabezado.setId_evidencia(Integer.parseInt(request.getParameter("cmbEvidencia")));
-                encabezado.setId_modulo(String.valueOf(request.getParameter("cmbModulo")));
-                encabezado.setId_norma(Integer.parseInt(request.getParameter("cmbNorma")));
-                encabezado.setId_resultado(Integer.parseInt(request.getParameter("cmbResultado")));
-                Gson respuesta = new Gson();
-                String jsonModules = respuesta.toJson(evaluacion_controlador.guardarEncabezadoEvaluacion(encabezado));
-                out.write(jsonModules);
+                String[] t = request.getParameterValues("elemento");
+                String desc = request.getParameter("descripcion");
+                String modulo = request.getParameter("cmbModulo");
+                String norma = "",elemento="",r;
+                int i = 0;
+                while ((norma = request.getParameter("norma[" + modulo + "][" + (i++) + "]")) != null) {
+                    encabezado.agregarNorma(norma);
+                    int k = 0;
+                    while ((elemento = request.getParameter("elemento[" + norma + "][" + (k++) + "]")) != null) {
+                        encabezado.agregarElementoNorma(norma, elemento);
+                    }
+                }
+                i = 0;
+                while ((r = request.getParameter("resultado[" + modulo + "][" + (i++) + "]")) != null) {
+                    encabezado.agregarResultado(r);
+                }
+                i = 0;
+                String json = request.getParameter("evidencias");
+                Gson gson = new Gson();
+                encabezado.setEvidencias(gson.fromJson(json, HashMap.class));
+             
+                evaluacion_controlador.guardarEncabezadoEvaluacion(encabezado);
+//                out.write(jsonModules);
             } else if (action.equals("list-encabezado")) {
                 int totalRows = Integer.parseInt(String.valueOf(request.getParameter("rows")));
                 int currentPageNumber = Integer.parseInt(String.valueOf(request.getParameter("page")));;
@@ -182,7 +204,7 @@ public class SvrEvaluacion extends HttpServlet {
                 String sordSerch = request.getParameter("sord") != null ? String.valueOf(request.getParameter("sord")) : "";
                 boolean search = request.getParameter("_search") != null ? Boolean.parseBoolean(request.getParameter("_search")) : false;
                 String filter = request.getParameter("filters") != null && !request.getParameter("filters").equals("") ? request.getParameter("filters") : null;
-                String res = evaluacion_controlador.getEncabezadosEvaluacion(currentPageNumber, limitNumber, sidx, sordSerch, search, totalRows,filter);
+                String res = evaluacion_controlador.getEncabezadosEvaluacion(currentPageNumber, limitNumber, sidx, sordSerch, search, totalRows, filter);
                 response.getWriter().write(res);
             }
         }

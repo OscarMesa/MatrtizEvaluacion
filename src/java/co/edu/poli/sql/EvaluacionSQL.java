@@ -56,7 +56,15 @@ public class EvaluacionSQL {
     }
 
     public static String GuardarEncabezadoEvaluacion() {
-        return "INSERT INTO encabezado_evaluacion (id_modulo,id_norma,id_elemento,id_resultado,id_evidencia,descripcion) VALUES(?,?,?,?,?,?)";
+        return "INSERT INTO encabezado_evaluacion (id_modulo,descripcion) VALUES(?,?)";
+    }
+    
+    public static String GuardarEncabezadoNorma(){
+        return "INSERT INTO encabezado_evaluacion_norma(id_encabezado,id_norma)";
+    }
+    
+    public static String GuardarElementoCopetencia(){
+        return "INSERT INTO encabezado_evaluacion_(id_encabezado,id_norma)";
     }
     
     public static String coutnEncabezadoEvaluacionList(String where) {

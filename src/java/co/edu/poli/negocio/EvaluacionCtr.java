@@ -215,11 +215,11 @@ public class EvaluacionCtr {
             Connection con = Conexion.getConexion();
             PreparedStatement st = con.prepareStatement(EvaluacionSQL.GuardarEncabezadoEvaluacion());
             st.setString(1, encabezado.getId_modulo());
-            st.setInt(2, encabezado.getId_norma());
-            st.setInt(3, encabezado.getId_elemento());
-            st.setInt(4, encabezado.getId_resultado());
-            st.setInt(5, encabezado.getId_evidencia());
-            st.setString(6, encabezado.getDescripcion());
+            st.setString(2, encabezado.getDescripcion());
+//            st.setInt(2, encabezado.getId_norma());
+//            st.setInt(3, encabezado.getId_elemento());
+//            st.setInt(4, encabezado.getId_resultado());
+//            st.setInt(5, encabezado.getId_evidencia());
             System.out.println(st);
 
             if (st.executeUpdate() > 0) {
