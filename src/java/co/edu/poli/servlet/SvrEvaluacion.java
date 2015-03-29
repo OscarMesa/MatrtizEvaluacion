@@ -19,11 +19,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javax.json.JsonArray;
-import javax.json.JsonValue;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author omesagar
  */
+@WebServlet(name = "SvrPersonal", urlPatterns = {"/SvrEvaluacion"})
 public class SvrEvaluacion extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
