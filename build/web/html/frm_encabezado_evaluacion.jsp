@@ -1,3 +1,7 @@
+<%@page import="co.edu.poli.dao.tipo_evidencias"%>
+<%@page import="co.edu.poli.negocio.Evidencia"%>
+<%@page import="co.edu.poli.dao.evidencia"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="co.edu.poli.dao.estado"%>
 <%@page import="co.edu.poli.negocio.EstadosCtr"%>
 <%@page import="co.edu.poli.dao.norma"%>
@@ -39,37 +43,56 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Norma de Competencia</td>
+                            <td style="vertical-align:text-top" class="titulo" width="20%"></td>
                             <td class="contenido">
-                                <input type="hidden" id="cmbNorma" style="width:650px;margin-bottom: 5px" class="input-xlarge"  name="cmbNorma"/>
+                                <div id="cmbNorma" style="width:650px;margin-bottom: 5px" class="input-xlarge" >
+
+                                </div>
                                 <label id="cmbNorma-error" class="error" for="cmbNorma"></label>
                             </td>
                         </tr>
                         <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Elemento de Competencia</td>
+                            <td style="vertical-align:text-top" class="titulo" width="20%"></td>
                             <td class="contenido">
-                                <input type="hidden" id="cmbElemento" style="width:650px;margin-bottom: 5px" class="input-xlarge" name="cmbElemento"/>
-                                <label id="cmbElemento-error" class="error" for="cmbElemento"></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Resultado de aprendizaje</td>
-                            <td class="contenido">
-                                <input type="hidden" id="cmbResultado" style="width:650px;margin-bottom: 5px" class="input-xlarge" name="cmbResultado"/>
-                                <label id="cmbResultado-error" class="error" for="cmbResultado"></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:text-top" class="titulo" width="20%">Evidencia</td>
-                            <td class="contenido">
-                                <input type="hidden" id="cmbEvidencia" style="width:650px;margin-bottom: 5px" class="input-xlarge" name="cmbEvidencia"/>
-                                <label id="cmbEvidencia-error" class="error" for="cmbEvidencia"></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
+                                <div id="cmbResultado" style="width:650px;margin-bottom: 5px" class="input-xlarge" >
 
+                                </div>
+                                <label id="cmbResultado-error" class="error" for="cmbNorma"></label>
                             </td>
+                        </tr>
+                        <tr>
+                        <table style="margin-left:10%; width: 76%; margin-top: 2%" border="0" class="table-condensed" cellspacing="0" cellpadding="0">
+
+                            <tr>
+                                <td class="titulo" colspan="6" style="text-align: center; margin-bottom: 30px; margin-top: 30px;">Porcentajes de Evidencias</td>
+                            </tr>
+
+                            <tr >
+                                <%
+                                    Evidencia e = new Evidencia();
+                                    ArrayList<tipo_evidencias> evidencias = e.getAllTiposEvidencia();
+                                    for (tipo_evidencias tp : evidencias) {
+                                %>
+                                <td style="width: 2%" class="titulo"><span class="evidencias">*</span></td>
+                                <td style="width: 35%" class="titulo"><% out.write(tp.getDescripcion()); %></td>
+                                <% } %>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <% int i = 0;
+                                    for (tipo_evidencias tp : evidencias) {
+                                %>
+                                <td class="contenido">
+                                    <input class="txt-porcentajes" style="width: 100px;height: 32px; border-radius: 4px;" autofocus="true" type="text" evidencia="<% out.write(String.valueOf(tp.getId_tipo_evidencia())); %>" name="evidencia<% out.write(String.valueOf(i++)); %>" />
+                                </td>
+                                <td></td>
+                                <% }%>
+                            </tr>
+                            <tr><td colspan="7"><label id="cmbPorcentaje-error" class="error" for=""></label></td></tr>
+                        </table>
+                        </tr>
+                        <tr>
+
                         </tr>
                     </table>
                 </form>
@@ -86,113 +109,130 @@
                     </table>
                 </div>
             </div>
-          <%@include file="pie_pag.jsp" %>
+            <%@include file="pie_pag.jsp" %>
         </div>
     </body>
 </html>
 
 <script type="text/javascript">
-    
-    $(document).on("click", "#listar",function(e){
+
+    $(document).on("click", "#listar", function (e) {
         e.preventDefault();
         window.location.href = '<c:url value="/html/lst-encabezado-evaluacion.jsp"/>';
     });
-    
-    $(document).on("click", "#guardar",function(e){
-        if(validarformulario())
+
+    $(document).on("click", "#guardar", function (e) {
+        if (validarformulario())
         {
             $("#cargando").show();
+            var e = {};
+            n = document.getElementsByClassName('txt-porcentajes');
+            r = false;
+            total = 0;
+            for (i = 0; i < n.length; i++) {
+                total += parseInt($(n[i]).val());
+                e[$(n[i]).attr("evidencia")] = $(n[i]).val();
+            }
             $.ajax({
                 url: $("#frm-encabezado-evaluacion").attr('action'),
-                dataType:'JSON',
+                dataType: 'JSON',
                 type: 'POST',
-                data: $("#frm-encabezado-evaluacion").serialize() + '&action=guardarEncabezadoEvaluacion',
-                error:function(e)
+                data: $("#frm-encabezado-evaluacion").serialize() + '&action=guardarEncabezadoEvaluacion&evidencias='+JSON.stringify(e),
+                error: function (e)
                 {
                     console.log(e);
                     alert("Error en el servidor");
                     $("#cargando").hide();
                 }
-            }).done(function(data){
+            }).done(function (data) {
                 $("#cargando").hide();
-                if(data.respuesta){
-                    abrirModal("modal-message",data.mensaje,"Registro guardado exitasamente.");
+                if (data.respuesta) {
+                    abrirModal("modal-message", data.mensaje, "Registro guardado exitasamente.");
                     resetFields();
-                }else{
-                    abrirModal("modal-message",data.mensaje,"Error.");
+                } else {
+                    abrirModal("modal-message", data.mensaje, "Error.");
                 }
             });
         }
         return false;
         e.preventDefault();
     });
-    
+
     function resetFields()
     {
         $("#frm-encabezado-evaluacion").trigger("reset");
-        $('#cmbModulo').select2('data', null);
-        $('#cmbNorma').select2('data', null);
-        $('#cmbResultado').select2('data', null);
-        $('#cmbEvidencia').select2('data', null);
-        $('#cmbElemento').select2('data', null);
+
     }
-    
-    function validarformulario(){
-        if($("#frm-encabezado-evaluacion").valid() && validatSelect2Modulo() && validatSelect2Norma() && validatSelect2Elemento() && validatSelect2Resultado() && validatSelect2Evidencia())
-        {    return true;
-        }else{
-            return false;
-        }
-    }
-    
-    function validatSelect2Modulo(){
-        if($('#cmbModulo').select2('data')!=null && $('#cmbModulo').select2('data').id!='')
+
+    function validatSelect2Modulo() {
+        if ($('#cmbModulo').select2('data') != null && $('#cmbModulo').select2('data').id != '')
         {
             return true;
         }
         $('#cmbModulo-error').html("El módulo es requerido.");
-        $('#cmbModulo-error').css("display","block");
+        $('#cmbModulo-error').css("display", "block");
         return false;
     }
-    
-    function validatSelect2Norma(){
-        if($('#cmbNorma').select2('data')!=null && $('#cmbNorma').select2('data').id>0)
-        {
+
+    function validatSelect2Norma() {
+        $('#cmbNorma-error').html("");
+        n = document.getElementsByClassName('w_normas');
+        r = false;
+        for (i = 0; i < n.length; i++) {
+            if ($(n[i]).prop('checked')) {
+                r = true;
+                break;
+            }
+        }
+        if (!r)
+            $('#cmbNorma-error').html("Debe seleccionar al menos una norma");
+        return r;
+    }
+
+    function validarPorcentajesDeEvidencias()
+    {
+        $('#cmbPorcentaje-error').html("");
+        n = document.getElementsByClassName('txt-porcentajes');
+        r = false;
+        total = 0;
+        for (i = 0; i < n.length; i++) {
+            total += parseInt($(n[i]).val());
+        }
+        if (total != 100) {
+            $('#cmbPorcentaje-error').html("Los porcentajes de evidencia deben estar dividivo entre todas sus evidencias y estas deben sumar el 100%.");
+            return false;
+        } else {
             return true;
         }
-        $('#cmbNorma-error').html("La norma es requerido.");
-        $('#cmbNorma-error').css("display","block");
-        return false;
     }
-    function validatSelect2Elemento(){
-        if($('#cmbElemento').select2('data')!=null && $('#cmbElemento').select2('data').id>0)
+
+    function validatSelect2Resultado()
+    {
+        $('#cmbResultado-error').html("");
+        n = document.getElementsByClassName('w_resultaddos');
+        r = false;
+        for (i = 0; i < n.length; i++) {
+            if ($(n[i]).prop('checked')) {
+                r = true;
+                break;
+            }
+        }
+        if (!r)
+            $('#cmbResultado-error').html("Debe seleccionar al menos un resultado de aprendizaje.");
+        return r;
+    }
+    function validarformulario() {
+        if (validarPorcentajesDeEvidencias() && validatSelect2Modulo() && validatSelect2Norma()
+                && validatSelect2Resultado() && validatSelect2Evidencia()
+                && $("#frm-encabezado-evaluacion").valid())
         {
             return true;
+        } else {
+            return false;
         }
-        $('#cmbElemento-error').html("El elemento es requerido.");
-        $('#cmbElemento-error').css("display","block");
-        return false;
     }
-    function validatSelect2Resultado(){
-        if($('#cmbResultado').select2('data')!=null && $('#cmbResultado').select2('data').id>0)
-        {
-            return true;
-        }
-        $('#cmbResultado-error').html("El resultado es requerido.");
-        $('#cmbResultado-error').css("display","block");
-        return false;
-        
-    }
-    function validatSelect2Evidencia(){
-        if($('#cmbEvidencia').select2('data')!=null && $('#cmbEvidencia').select2('data').id>0)
-        {
-            return true;
-        }
-        $('#cmbEvidencia-error').html("La evidencia es requerido.");
-        $('#cmbEvidencia-error').css("display","block");
-        return false;
-        
-    }
+
+
     $('#cmbModulo').select2({
         placeholder: 'Módulo a evaluar',
         ajax: {
@@ -201,7 +241,6 @@
             quietMillis: 100,
             cache: true,
             data: function (term, page) {
-                $('#cmbNorma').select2('data', null);
                 $('#cmbResultado').select2('data', null);
                 $('#cmbEvidencia').select2('data', null);
                 return {
@@ -211,7 +250,7 @@
                 };
             },
             results: function (data, page) {
-                $('#cmbModulo-error').css("display","none");
+                $('#cmbModulo-error').css("display", "none");
                 return {results: data};
             }
 
@@ -224,99 +263,44 @@
             });
         }
 
-    });
+    }).on("change", function (e) {
+        $.ajax({
+            url: '../SvrEvaluacion',
+            data: {action: 'obtenerNorma', modulo: ($("#cmbModulo").select2("data") != null ? $("#cmbModulo").select2("data").id : "")},
+            success: function (e) {
+                $('#cmbNorma-error').html("");
+                if (e == 0)
+                {
+                    $("#cmbNorma").html("El módulo " + $("#cmbModulo").select2("data").text + " no presenta ninguna norma asociada.");
+                } else {
+                    $("#cmbNorma").html(e);
+                }
 
-    $('#cmbNorma').select2({
-        placeholder: 'Norma a evaluar',
-        ajax: {
-            url: "../SvrEvaluacion",
-            dataType: 'json',
-            quietMillis: 100,
-            cache: true,
-            data: function (term, page) {
-                $('#cmbElemento').select2('data', null);
-                return {
-                    term: term,
-                    modulo: ($("#cmbModulo").select2("data") != null ? $("#cmbModulo").select2("data").id : ""),
-                    action: 'obtenerNorma', //search term
-                    page_limit: 10 // page size
-                };
+
+                $.ajax({
+                    url: '../SvrEvaluacion',
+                    data: {action: 'obtenerResultado', modulo: ($("#cmbModulo").select2("data") != null ? $("#cmbModulo").select2("data").id : "")},
+                    success: function (e) {
+                        if (e == 0)
+                        {
+                            $("#cmbResultado").html("El módulo " + $("#cmbModulo").select2("data").text + " ningun resultado de aprendizaje asociado.");
+                        } else {
+                            $("#cmbResultado").html(e);
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e)
+                    }
+                });
+
             },
-            results: function (data, page) {
-                $('#cmbNorma-error').css("display","none");
-                return {results: data};
+            error: function (e) {
+                alert(e)
             }
+        });
 
-        },
-        initSelection: function (element, callback) {
-            return $.getJSON("../SvrEvaluacion", null, function (data) {
 
-                return callback(data);
 
-            });
-        }
-
-    });
-
-    $('#cmbElemento').select2({
-        placeholder: 'Elemento a evaluar',
-        ajax: {
-            url: "../SvrEvaluacion",
-            dataType: 'json',
-            quietMillis: 100,
-            cache: true,
-            data: function (term, page) {
-                return {
-                    term: term,
-                    norma: ($("#cmbNorma").select2("data") != null ? $("#cmbNorma").select2("data").id : ""),
-                    action: 'obtenerElemento', //search term
-                    page_limit: 10 // page size
-                };
-            },
-            results: function (data, page) {
-                $('#cmbElemento-error').css("display","none");
-                return {results: data};
-            }
-
-        },
-        initSelection: function (element, callback) {
-            return $.getJSON("../SvrEvaluacion", null, function (data) {
-
-                return callback(data);
-
-            });
-        }
-
-    });
-
-    $('#cmbResultado').select2({
-        placeholder: 'Resultado esperado.',
-        ajax: {
-            url: "../SvrEvaluacion",
-            dataType: 'json',
-            quietMillis: 100,
-            cache: true,
-            data: function (term, page) {
-                return {
-                    term: term,
-                    modulo: ($("#cmbModulo").select2("data") != null ? $("#cmbModulo").select2("data").id : ""),
-                    action: 'obtenerResultado', //search term
-                    page_limit: 10 // page size
-                };
-            },
-            results: function (data, page) {
-                $('#cmbResultado-error').css('display','none');
-                return {results: data};
-            }
-
-        },
-        initSelection: function (element, callback) {
-            return $.getJSON("../SvrEvaluacion", null, function (data) {
-
-                return callback(data);
-
-            });
-        }
 
     });
 
@@ -336,7 +320,7 @@
                 };
             },
             results: function (data, page) {
-                $('#cmbEvidencia-error').css('display','none');
+                $('#cmbEvidencia-error').css('display', 'none');
                 return {results: data};
             }
 
@@ -354,19 +338,18 @@
     $("#frm-encabezado-evaluacion").validate({
         rules: {
             descripcion: "required",
-            cmbModulo : "required",
-           
+            cmbModulo: "required",
         },
         messages: {
-            descripcion : {
+            descripcion: {
                 required: "La descripcion es requerida.",
             },
-            cmbModulo : {
+            cmbModulo: {
                 required: "El modulo es requerida.",
             }
         }
     });
-    
-    
+
+
 
 </script>

@@ -21,7 +21,7 @@
                         <div class="col">
                             <ul>
                                 <li><a href="<c:url value="/html/frm_norma_1.jsp" />"><img src="<c:url value="/images/bub.png"/>" />Normas de Competencia</a></li>
-                                <li><a href="<c:url value="/html/frm_asignar_norma_modulo.jsp"/>"><img src="<c:url value="/images/bub.png"/>" /> Asignar Normas a Modulos</a></li>
+                                <li><a href="<c:url value="/html/frm_asignar_norma_modulo.jsp"/>"><img src="<c:url value="/images/bub.png"/>" /> Asignar Normas a Módulos</a></li>
                                 <li><a href="<c:url value="/html/frm_elementos.jsp"/> "><img src="<c:url value="/images/bub.png"/>" /> Elementos de Competencia</a></li>
                                 <li><a href="<c:url value="/html/frm_asignar_elemento_norma.jsp"/>"><img src="<c:url value="/images/bub.png"/>" /> Asignar Elementos a Normas</a></li>
                             </ul>
@@ -33,7 +33,7 @@
                         <div class="col">
                             <ul>
                                 <li><a href="<c:url value="/html/frm_resultados_aprendizaje.jsp"/>"><img src="<c:url value="/images/bub.png"/>" /> Resultados de Apredizaje</a></li>
-                                <li><a href="<c:url value="/html/frm_asignar_resultado_modulo.jsp"/>"><img src="<c:url value="/images/bub.png"/>" /> Asignar Resultados a Materias</a></li>
+                                <li><a href="<c:url value="/html/frm_asignar_resultado_modulo.jsp"/>"><img src="<c:url value="/images/bub.png"/>" /> Asignar Resultados a Módulos</a></li>
                             </ul>
                         </div>
                     </div>
@@ -43,17 +43,16 @@
                         <div class="col">
                             <ul>
                                 <li><a href="<c:url value="/html/frm_criterios.jsp"/>"><img src="<c:url value="/images/bub.png"/>" />Criterios y Rubricas de Evaluación</a></li>
-                                <li><a href="<c:url value="/html/frm_asignar_criterio_modulo.jsp"/>"><img src="<c:url value="/images/bub.png"/>" />Asignar Criterio a Modulos</a></li>
+                                <li><a href="<c:url value="/html/frm_asignar_criterio_modulo.jsp"/>"><img src="<c:url value="/images/bub.png"/>" />Asignar Criterio a Módulos</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
-                <li><a href="frm_evaluacion.sp"><img src="<c:url value="/images/top4.png"/>" /> Evaluación</a>
+                <li><a href="#"><img src="<c:url value="/images/top4.png"/>" /> Evaluación</a>
                     <div class="subs">
                         <div class="col">
                             <ul>
                                 <li><a href="<c:url value="/html/frm_encabezado_evaluacion.jsp"/>"><img src="<c:url value="/images/bub.png"/>" />Encabezado evaluación</a></li>
-                                <li><a href="<c:url value="/html/frm_evidencias_modulo_porc.jsp"/>"><img src="<c:url value="/images/bub.png"/>" />Porcentajes de Evidencias para Modulos</a></li>
                                 <li><a href="<c:url value="/html/frm_item_evaluacion.jsp"/>"><img src="<c:url value="/images/bub.png"/>" />Seleccionar Ítems de Evaluación</a></li>
                                 <li><a href="<c:url value="/html/frm_evaluacion.jsp"/>"><img src="<c:url value="/images/bub.png"/>" />Evaluar Estudiantes</a></li>
                             </ul>

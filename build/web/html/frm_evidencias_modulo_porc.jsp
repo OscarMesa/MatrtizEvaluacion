@@ -67,6 +67,7 @@
 
 
                 <table style="margin-left:10%; width: 76%; margin-top: 2%" border="0" class="table-condensed" cellspacing="0" cellpadding="0">
+                    
                     <tr >
                         <td style="width: 2%" class="titulo"><span class="campoObligatorio">*</span></td>
                         <td style="width: 38%" class="titulo">Conocimiento</td>

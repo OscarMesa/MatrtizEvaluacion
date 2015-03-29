@@ -2,5 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-     </open-files>
+        <group>
+            <file>file:/C:/PPI/MatrizEvaluacion/web/html/lst-encabezado-evaluacion.jsp</file>
+            <file>file:/C:/PPI/MatrizEvaluacion/web/html/frm_resultados_aprendizaje.jsp</file>
+            <file>file:/C:/PPI/MatrizEvaluacion/web/html/frm_encabezado_evaluacion.jsp</file>
+            <file>file:/C:/PPI/MatrizEvaluacion/src/java/co/edu/poli/dao/encabezado_evaluacion.java</file>
+            <file>file:/C:/PPI/MatrizEvaluacion/src/java/co/edu/poli/servlet/SvrEvaluacion.java</file>
+        </group>
+    </open-files>
 </project-private>

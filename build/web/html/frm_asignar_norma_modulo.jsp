@@ -12,7 +12,7 @@
         <%@include file="banner_menu.jsp" %>
         <div style="margin-left: 15%; margin-bottom:4%; background-color: #ffffff; margin-right: 15%; padding: 2%">
 
-          <p class="titulo2">Asignación de normas a modulos</p>
+          <p class="titulo2">Asignación de normas a módulos</p>
             <div class="table-responsive">
                 
                 <!--<div style="padding-top: 10px; padding-bottom: 10px; margin-right: 120px; margin-left: 120px; background-color: #fefee0; border-radius: 20px;">-->
@@ -39,11 +39,11 @@
                    
                     <tr>
                          <td><span class="campoObligatorio">*</span></td>
-                        <td class="titulo" colspan="2">Modulo</td>
+                        <td class="titulo" colspan="2">Módulo</td>
                         <td colspan="5">
                            
                          <select class="select" style="width:70%; height: 30px;">
-                                <option value="0">Seleccione el Modulo</option>
+                                <option value="0">Seleccione el Módulo</option>
                                 <option value="20">_____________________________</option>
                                 <option value="1">Desarrollo del Pensamiento AnalÃ­tico y Sistemico 1</option>
                                 <option value="2">Desarrollo del Pensamiento AnalÃ­tico y Sistemico 2</option>
