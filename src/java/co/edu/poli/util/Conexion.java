@@ -27,7 +27,7 @@ public class Conexion {
         try{
             String url = "jdbc:mysql://localhost/sistema_competencias";
             String user = "root";
-            String password = "";
+            String password = "root";
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url,user,password);
         }catch(Exception e){e.printStackTrace();}

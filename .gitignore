@@ -1,3 +1,5 @@
 /build/
 /nbproject/
 /dist/
+/nbproject/project.properties
+/web/WEB-INF/
